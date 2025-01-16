@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('assets/fonts/nippo/css/nippo.css');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+.highlight {
+    fill: none;
+    stroke-width: 1.5;
+    stroke: #491EC4;
+  }
+  
+.highlight:hover {
+/* background-color: pink; */
+stroke: red;
+}
+
