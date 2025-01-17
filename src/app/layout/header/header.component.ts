@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -15,4 +15,12 @@ export class HeaderComponent {
   ]
 
   cartCounter=0;
+
+  scrolled = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Check the scroll position
+    this.scrolled = window.scrollY > 0;
+  }
 }

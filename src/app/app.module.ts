@@ -12,6 +12,7 @@ import { HeartLogoComponent } from './logoSVG/heart-logo/heart-logo.component';
 import { ShopComponent } from './features/shop/shop.component';
 import { BlueHeartComponent } from './features/blue-heart/blue-heart.component';
 import { PartenairesComponent } from './features/partenaires/partenaires.component';
+import { RightArrowComponent } from './logoSVG/right-arrow/right-arrow.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PartenairesComponent } from './features/partenaires/partenaires.compone
     ShopComponent,
     BlueHeartComponent,
     PartenairesComponent,
+    RightArrowComponent,
   ],
   imports: [
     BrowserModule,

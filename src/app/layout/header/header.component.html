@@ -1,11 +1,12 @@
-<header class="bg-[#0d1015] py-6 z-10 w-full sm:px-8 px-4 border-b border-[#4f5264] sticky top-0">
-    <nav class="flex justify-between items-center">
+<header class=" h-24 z-10 w-full sm:px-8 px-4 border-b border-[#4f5264] sticky top-0" [ngClass]="!scrolled ? ['bg-transparent', 'border-none'] : 'bg-[#0d1015]'">
+    <nav class="flex justify-between items-center h-full">
         <a routerLink="/">
             <img src="assets/images/Kcorp-logo.svg" alt="Logo" width="60">
         </a>
         <ul class="flex justify-center items-center gap-10 max-xl:hidden">
             <li *ngFor="let nav of navLink">
-                <a [routerLink]="nav.href" class="text-white text-sm font-nippo hover:text-primary-light cursor-pointer" [ngClass]="{'text-primary-light' : nav.label==='BOUTIQUE'}">
+                <a [routerLink]="nav.href" class="text-sm font-nippo hover:text-primary-light cursor-pointer" [ngClass]="
+                nav.label==='BOUTIQUE' ? 'text-primary-light' : 'text-white'">
                     {{nav.label}}
                 </a>
             </li>
