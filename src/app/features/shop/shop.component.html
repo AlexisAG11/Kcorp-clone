@@ -23,5 +23,16 @@
             </div>
         </div>
     </div>
-    <div class="mt-[7.5rem]">Partenaire</div>
+    <div class="mt-[7.5rem] border-y-[.0625rem] border-[#4f5264] bg-primary-black w-full h-56">
+        <div class="w-full h-full overflow-hidden">
+            <ul class="flex animate-slider1 md:animate-slider2 lg:animate-slider3 h-full">
+                <li *ngFor="let partenaire of partenaires" class=" w-2/4 sm:w-1/4 lg:w-1/6 shrink-0 flex items-center justify-center">
+                    <img class="object-cover" [src]="partenaire.link" width="125" alt="">
+                </li>
+                <li *ngFor="let partenaire of partenairesValue" class=" w-2/4 sm:w-1/4 lg:w-1/6 shrink-0 flex items-center justify-center">
+                    <img class="object-cover" [src]="partenaire.link" width="125" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
