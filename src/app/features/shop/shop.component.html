@@ -1,38 +1,5 @@
 <div class="text-white bg-primary-black">
-    <div class="relative -mt-24 overflow-hidden">
-        <div class="hidden md:block">
-            <img src="../../../assets/images/Banner.png" alt="banner" class="scale-110">
-        </div>
-        <div class="md:hidden">
-            <img src="../../../assets/images/BannerMobile.png" alt="mobile" class="">
-        </div>
-        <div class="absolute inset-0 bg-black bg-opacity-30 pointer-events-none"></div>
-
-        <div class="absolute left-1/2 md:bottom-16 transform -translate-x-1/2 text-white 2xl:w-[82.5rem] xl:w-[72.5rem] lg:w-[60rem] md:w-[45rem] flex flex-col items-center gap-10 w-full bottom-10">
-            <!-- RESPONSIVE ADVICE : I should do the mobile one as defualt (recommanded by tailwind) and add the one for the laptop in good order -->
-            <div class="lg:text-[5rem] lg:leading-[5rem] md:leading-[3.75rem] font-bold font-cairo md:text-[3.75rem] text-[1.75rem] leading-[1.75rem]">
-                NOUVEAU MAILLOT 2025
-            </div>
-            <div class="font-nippo">
-               <a [routerLink]="" class="flex flew-row border border-white cursor-pointer hover:bg-primary-light hover:text-black hover:border-primary-black group transition-all text-sm md:text-base">
-                    <div class="py-2 px-6">ACHETER</div>
-                    <div class="border-l py-2 px-3 flex items-center group-hover:border-primary-black">
-                        <app-right-arrow></app-right-arrow>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="mt-[7.5rem] border-y-[.0625rem] border-[#4f5264] bg-primary-black w-full h-56">
-        <div class="w-full h-full overflow-hidden">
-            <ul class="flex animate-slider1 md:animate-slider2 lg:animate-slider3 h-full">
-                <li *ngFor="let partenaire of partenaires" class=" w-2/4 sm:w-1/4 lg:w-1/6 shrink-0 flex items-center justify-center">
-                    <img class="object-cover" [src]="partenaire.link" width="125" alt="">
-                </li>
-                <li *ngFor="let partenaire of partenairesValue" class=" w-2/4 sm:w-1/4 lg:w-1/6 shrink-0 flex items-center justify-center">
-                    <img class="object-cover" [src]="partenaire.link" width="125" alt="">
-                </li>
-            </ul>
-        </div>
-    </div>
+    <app-shop-banner></app-shop-banner>
+    <app-shop-partenaires></app-shop-partenaires>
+    <app-shop-derniere-collection></app-shop-derniere-collection>
 </div>

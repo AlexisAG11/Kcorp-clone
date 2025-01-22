@@ -1,0 +1,45 @@
+<div class="mt-20">
+    <div class="flex flex-col items-center font-cairo">
+        <p class="text-primary-light text-sm">le shop de la KarminCorp</p>
+        <p class="text-2xl font-bold mt-[0.63rem]">NOTRE DERNIERE COLLECTION</p>
+        <ul class="flex mt-[1.5625rem] text-sm border-b-[.125rem] border-white/30">
+            <li class="mb-[-.125rem]">
+                <button class="px-[.3125rem] pb-[.625rem] transition-colors" [ngClass]="typeCollection[0].onIt === true ? ['font-bold', 'border-primary-light', 'border-b-[.1875rem]', 'text-primary-light'] : 'font-light'" (click)="onTypeCollection(typeCollection[0].label)">{{typeCollection[0].label}}</button>
+            </li>
+            <li class="mb-[-.125rem]">
+                <button class="px-[.3125rem] pb-[.625rem] ml-4  transition-colors" [ngClass]="typeCollection[1].onIt === true ? ['font-bold', 'border-primary-light', 'border-b-[.1875rem]', 'text-primary-light'] : 'font-light'" (click)="onTypeCollection(typeCollection[1].label)">{{typeCollection[1].label}}</button>
+            </li>
+            <li class="font-light mb-[-.125rem]">
+                <button class="px-[.3125rem] pb-[.625rem] ml-4 transition-colors" [ngClass]="typeCollection[2].onIt === true ? ['font-bold', 'border-primary-light', 'border-b-[.1875rem]', 'text-primary-light'] : 'font-light'" (click)="onTypeCollection(typeCollection[2].label)">{{typeCollection[2].label}}</button>
+            </li>
+        </ul>
+    </div>
+    <div #container class="mt-[1.875rem] w-full flex justify-center">
+        <div class="w-11/12 overflow-hidden">
+            <ul #carousel class="flex overflow-hidden h-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
+                <li #firstImg class="flex flex-col justify-center w-full shrink-0 mr-[10px]">
+                    <img src="../../../../../assets/images/4_2025.webp" alt="" class="object-cover w-full h-[523px]" draggable="false">
+                    <div class="pl-[.625rem] pt-[.625rem]">
+                        <p class="font-cairo text-[.75rem] font-bold">Maillot Ultra 2025</p>
+                        <p class="font-cairo text-[.75rem] mt-1">€65,00</p>
+                    </div>
+                </li>
+                <li class="flex flex-col justify-center w-full shrink-0 mr-[10px]">
+                    <img src="../../../../../assets/images/Frontultra.webp" alt="" class="object-cover w-full h-[523px]" draggable="false">
+                    <div class="pl-[.625rem] pt-[.625rem]">
+                        <p class="font-cairo text-[.75rem] font-bold">Maillot Ultra 2026</p>
+                        <p class="font-cairo text-[.75rem] mt-1">€65,00</p>
+                    </div>
+                </li>
+                <li class="flex flex-col justify-center w-full shrink-0">
+                    <img src="../../../../../assets/images/Marteen_Veste.webp" alt="" class="object-cover w-full h-[523px]" draggable="false">
+                    <div class="pl-[.625rem] pt-[.625rem]">
+                        <p class="font-cairo text-[.75rem] font-bold">Maillot Ultra 2027</p>
+                        <p class="font-cairo text-[.75rem] mt-1">€65,00</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mt-8">fd</div>
+</div>
