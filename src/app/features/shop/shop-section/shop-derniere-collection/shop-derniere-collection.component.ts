@@ -14,6 +14,12 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     {label: 'Accessoires', onIt: false  },
   ]
 
+  nosProduitsImg = [
+    {imgUrl: '../../../../../assets/images/4_2025.webp', title: ' Maillot Pro 2025', subtitle: 'Dès €80,00'},
+    {imgUrl: '../../../../../assets/images/Frontultra.webp' , title: ' Maillot Ultra 2025', subtitle: 'Dès €65,00'},
+    {imgUrl: '../../../../../assets/images/Marteen_Veste.webp' , title: ' Veste Pro Kit 2025', subtitle: 'Dès €90,00'},
+  ]
+
 
   onTypeCollection(label: string){
     const indexOld = this.typeCollection.findIndex(item => item.onIt === true);
@@ -27,15 +33,6 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     console.log(this.typeCollection);
   }
   
-
-  // onMouseMove(event: MouseEvent){
-  //   this.scrollRight()
-  // }
-
-  // public scrollRight(): void {
-  //   this.scrollContainer.nativeElement.scrollTo({ left: (this.scrollContainer.nativeElement.scrollLeft + 150), behavior: 'smooth' });
-  // }
-
   carousel: any;
   firstImg: any;
   container: any;
@@ -50,7 +47,8 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   prevScrollLeft: any;
   positionDiff: any
   dragSmooth = true;
-
+  indexImg = 0;
+  
   onMouseMove(e: MouseEvent | TouchEvent) {
     if (this.carousel) {
       if (!this.isDrageStart) return
@@ -81,7 +79,10 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   }
 
   autoSlide() {
-    if (this.carousel.scrollLeft == (this.carousel.scrollWidth - this.carousel.clientWidth)) return;
+
+    if (this.carousel.scrollLeft == (this.carousel.scrollWidth - this.carousel.clientWidth)) {
+      return;
+    } 
 
 
     this.positionDiff = Math.abs(this.positionDiff);
@@ -89,15 +90,36 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     let firstImgWidth = this.firstImg.getBoundingClientRect().width + 10
     let valDifference = firstImgWidth - this.positionDiff;
 
+    // right
     if (this.carousel.scrollLeft > this.prevScrollLeft) {
-      // return this.carousel.scrollLeft += this.positionDiff > firstImgWidth / 3 ? valDifference : -this.positionDiff;
-      const targetScrollLeft = this.carousel.scrollLeft + (this.positionDiff > firstImgWidth / 3 ? valDifference : -this.positionDiff);
-      this.smoothScroll(targetScrollLeft);
+      // full on the right don't go further
+      if (this.indexImg === this.nosProduitsImg.length-1) return
+      if (this.positionDiff > firstImgWidth / 3) {
+        const targetScrollLeft = this.carousel.scrollLeft + valDifference
+        this.indexImg++;
+        this.smoothScroll(targetScrollLeft);
+      }
+      else {
+        if (this.indexImg === this.nosProduitsImg.length-1) return
+        const targetScrollLeft = this.carousel.scrollLeft + (-this.positionDiff)
+        this.smoothScroll(targetScrollLeft);
+      }
       return
     }
-    // this.carousel.scrollLeft -= this.positionDiff > firstImgWidth / 3 ? valDifference : -this.positionDiff;
-    const targetScrollLeft = this.carousel.scrollLeft - (this.positionDiff > firstImgWidth / 3 ? valDifference : -this.positionDiff);
-    this.smoothScroll(targetScrollLeft);
+    // left
+    if (this.positionDiff > firstImgWidth / 3) {
+      // full on the left don't go further
+      if (this.indexImg === 0) return
+      const targetScrollLeft = this.carousel.scrollLeft - valDifference
+      console.log(targetScrollLeft);
+      this.indexImg--;
+      this.smoothScroll(targetScrollLeft);
+    }
+    else {
+      if (this.indexImg === 0) return
+      const targetScrollLeft = this.carousel.scrollLeft - (-this.positionDiff)
+      this.smoothScroll(targetScrollLeft);
+    }
   }
 
   onMouseUp(e: MouseEvent | TouchEvent) {
@@ -130,6 +152,22 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     };
   
     window.requestAnimationFrame(scrollStep);
+  }
+
+  setIndexImg(index: number){
+    const diffIndex = index - this.indexImg;
+    const targetScrollLeft = index*(this.firstImg.getBoundingClientRect().width+10)
+    if (diffIndex===0) {
+      return
+    }
+    if (diffIndex>0) {
+      this.indexImg+= diffIndex;
+    }
+    if (diffIndex<0) {
+      this.indexImg+= diffIndex;
+
+    }
+    this.smoothScroll(targetScrollLeft);
   }
 
 

@@ -14,31 +14,20 @@
             </li>
         </ul>
     </div>
-    <div #container class="mt-[1.875rem] w-full flex justify-center">
-        <div class="w-11/12 overflow-hidden">
+    <div #container class="mt-[1.875rem] w-full flex flex-col items-center">
+        <div class="px-[1.25rem] overflow-hidden">
             <ul #carousel class="flex overflow-hidden h-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
-                <li #firstImg class="flex flex-col justify-center w-full shrink-0 mr-[10px]">
-                    <img src="../../../../../assets/images/4_2025.webp" alt="" class="object-cover w-full h-[523px]" draggable="false">
+                <li *ngFor="let nosProduitImg of nosProduitsImg; let i = index" #firstImg class="flex flex-col justify-center w-full shrink-0 transition-translateX ease-in-out duration-300" [ngClass]="i === nosProduitsImg.length-1 ? 'mr-[0px]' : 'mr-[10px]'">
+                    <img [src]="nosProduitImg.imgUrl" alt="" class="object-cover w-full h-full" draggable="false">
                     <div class="pl-[.625rem] pt-[.625rem]">
-                        <p class="font-cairo text-[.75rem] font-bold">Maillot Ultra 2025</p>
-                        <p class="font-cairo text-[.75rem] mt-1">€65,00</p>
-                    </div>
-                </li>
-                <li class="flex flex-col justify-center w-full shrink-0 mr-[10px]">
-                    <img src="../../../../../assets/images/Frontultra.webp" alt="" class="object-cover w-full h-[523px]" draggable="false">
-                    <div class="pl-[.625rem] pt-[.625rem]">
-                        <p class="font-cairo text-[.75rem] font-bold">Maillot Ultra 2026</p>
-                        <p class="font-cairo text-[.75rem] mt-1">€65,00</p>
-                    </div>
-                </li>
-                <li class="flex flex-col justify-center w-full shrink-0">
-                    <img src="../../../../../assets/images/Marteen_Veste.webp" alt="" class="object-cover w-full h-[523px]" draggable="false">
-                    <div class="pl-[.625rem] pt-[.625rem]">
-                        <p class="font-cairo text-[.75rem] font-bold">Maillot Ultra 2027</p>
-                        <p class="font-cairo text-[.75rem] mt-1">€65,00</p>
+                        <p class="font-cairo text-[.75rem] font-bold">{{nosProduitImg.title}}</p>
+                        <p class="font-cairo text-[.75rem] mt-1">{{nosProduitImg.subtitle}}</p>
                     </div>
                 </li>
             </ul>
+        </div>
+        <div class="flex gap-[.6250rem] mt-6">
+            <button *ngFor="let nosProduitImg of nosProduitsImg; let i = index" class=" w-4 h-[3px] color" (click)="setIndexImg(i)" [ngClass]="i === indexImg ? 'bg-primary-light' : 'bg-white/50'"></button>
         </div>
     </div>
     <div class="mt-8">fd</div>
