@@ -3,31 +3,128 @@
         <p class="text-primary-light text-sm">le shop de la KarminCorp</p>
         <p class="text-2xl font-bold mt-[0.63rem]">NOTRE DERNIERE COLLECTION</p>
         <ul class="flex mt-[1.5625rem] text-sm border-b-[.125rem] border-white/30">
-            <li class="mb-[-.125rem]">
-                <button class="px-[.3125rem] pb-[.625rem] transition-colors" [ngClass]="typeCollection[0].onIt === true ? ['font-bold', 'border-primary-light', 'border-b-[.1875rem]', 'text-primary-light'] : 'font-light'" (click)="onTypeCollection(typeCollection[0].label)">{{typeCollection[0].label}}</button>
-            </li>
-            <li class="mb-[-.125rem]">
-                <button class="px-[.3125rem] pb-[.625rem] ml-4  transition-colors" [ngClass]="typeCollection[1].onIt === true ? ['font-bold', 'border-primary-light', 'border-b-[.1875rem]', 'text-primary-light'] : 'font-light'" (click)="onTypeCollection(typeCollection[1].label)">{{typeCollection[1].label}}</button>
-            </li>
-            <li class="font-light mb-[-.125rem]">
-                <button class="px-[.3125rem] pb-[.625rem] ml-4 transition-colors" [ngClass]="typeCollection[2].onIt === true ? ['font-bold', 'border-primary-light', 'border-b-[.1875rem]', 'text-primary-light'] : 'font-light'" (click)="onTypeCollection(typeCollection[2].label)">{{typeCollection[2].label}}</button>
+            <li *ngFor="let type of typeCollection; let i = index" class="mb-[-.125rem]">
+                <button class="px-[.3125rem] pb-[.625rem]  transition-colors" [ngClass]="{'font-bold border-primary-light border-b-[.1875rem] text-primary-light':type.onIt === true, 'font-light': type.onIt === false, 'ml-4': i != 0}" (click)="onTypeCollection(type.label)">{{type.label}}</button>
             </li>
         </ul>
     </div>
-    <div #container class="mt-[1.875rem] w-full flex flex-col items-center">
-        <div class="px-[1.25rem] overflow-hidden">
-            <ul #carousel class="flex overflow-hidden h-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
-                <li *ngFor="let nosProduitImg of nosProduitsImg; let i = index" #firstImg class="flex flex-col justify-center w-full shrink-0 transition-translateX ease-in-out duration-300" [ngClass]="i === nosProduitsImg.length-1 ? 'mr-[0px]' : 'mr-[10px]'">
-                    <img [src]="nosProduitImg.imgUrl" alt="" class="object-cover w-full h-full" draggable="false">
-                    <div class="pl-[.625rem] pt-[.625rem]">
-                        <p class="font-cairo text-[.75rem] font-bold">{{nosProduitImg.title}}</p>
-                        <p class="font-cairo text-[.75rem] mt-1">{{nosProduitImg.subtitle}}</p>
+    <div #container0 class="mt-[1.875rem] w-full flex flex-col items-center" [ngClass]="typeCollection[0].onIt === true ? 'block' : 'hidden'">
+        <div class="px-[1.25rem] md:px-[2.1rem] overflow-hidden max-w-[85.625rem]">
+            <ul #carousel0 class="flex overflow-hidden h-full w-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
+                <li *ngFor="let nosProduitImg of nosProduitsImg; let i = index" #firstImg0 class=" relative w-full shrink-0  md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img"   [ngClass]="{
+                    'mr-[0px]': i === nosProduitsImg.length - 1,
+                    'mr-[10px] md:mr-[25px] lg:mr-[40px]': i !== nosProduitsImg.length - 1,
+                    }">
+                    <img [src]="nosProduitImg.imgUrl" alt="" class="object-cover w-full" draggable="false">
+                    <div class="px-[.625rem] py-[.625rem] md:px-4 md:py-4 lg:px-[1.25rem] lg:py-[1.25rem] text-[.75rem] md:text-[1rem] lg:text-[1.25rem] leading-4 md:leading-5 group-hover/img:translate-y-[-2.8125rem] transition-transform duration-200 bg-primary-black">
+                        <p class="font-cairo font-bold">{{nosProduitImg.title}}</p>
+                        <p class="font-cairo mt-1 md:mt-[.375rem]">{{nosProduitImg.subtitle}}</p>
+                    </div>
+                    <div class="absolute left-0 bottom-0 right-0 overflow-hidden">
+                        <div class="px-[1.25rem] transform translate-y-full transition-transform duration-200 group-hover/img:translate-y-0 w-full group/btn">
+                            <button class=" font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] group-hover/btn:text-white group-hover/btn:bg-[#101e35] "> AJOUTER AU PANIER</button>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <!-- button to slide images -->
+        <div class="w-full h-[20px] mt-6 relative max-w-[85.625rem]">
+            <div class="flex gap-[.6250rem] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <button *ngFor="let num of numOfbtn; let i = index" class=" w-4 h-[3px] color" (click)="setIndexImg(i)" [ngClass]="i === indexImg ? 'bg-primary-light' : 'bg-white/50'"></button>
+            </div>
+            <!-- only display on big screen -->
+            <div *ngIf="marginRight!==10" class="flex gap-1 absolute right-0 px-[1.25rem] md:px-[2.1rem]">
+                <button class="hover:text-primary-light hover:cursor-pointer"  [ngClass]="indexImg === 0 ? 'pointer-events-none' : 'text-primary-light'" (click)="setIndexImg(indexImg-1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>                 
+                </button>
+                <button class="hover:text-primary-light hover:cursor-pointer" [ngClass]="indexImg === (nosProduitsImg.length - 3) ? 'pointer-events-none' : 'text-primary-light'" (click)="setIndexImg(indexImg+1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg> 
+                </button>
+            </div>
+        </div>
+    </div>
+    <div #container1 class="mt-[1.875rem] w-full flex flex-col items-center" [ngClass]="typeCollection[1].onIt === true ? 'block' : 'hidden'">
+        <div class="px-[1.25rem] md:px-[2.1rem] overflow-hidden max-w-[85.625rem]">
+            <ul #carousel1 class="flex overflow-hidden h-full w-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
+                <li *ngFor="let Img of chromaImg; let i = index" #firstImg1 class="relative w-full shrink-0 md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img" [ngClass]="{
+                    'mr-[0px]': i === chromaImg.length - 1,
+                    'mr-[10px] md:mr-[25px] lg:mr-[40px]': i !== chromaImg.length - 1,
+                    }">
+                    <img [src]="Img.imgUrl" alt="" class="object-cover w-full" draggable="false">
+                    <div class="px-[.625rem] py-[.625rem] md:px-4 md:py-4 lg:px-[1.25rem] lg:py-[1.25rem] text-[.75rem] md:text-[1rem] lg:text-[1.25rem] leading-4 md:leading-5 group-hover/img:translate-y-[-2.8125rem] transition-transform duration-200 bg-primary-black">
+                        <p class="font-cairo font-bold">{{Img.title}}</p>
+                        <p class="font-cairo mt-1 md:mt-[.375rem]">{{Img.subtitle}}</p>
+                    </div>
+                    <div class="absolute left-0 bottom-0 right-0 overflow-hidden">
+                        <div class="px-[1.25rem] transform translate-y-full transition-transform duration-200 group-hover/img:translate-y-0 w-full group/btn">
+                            <button class=" font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] group-hover/btn:text-white group-hover/btn:bg-[#101e35] "> AJOUTER AU PANIER</button>
+                        </div>
                     </div>
                 </li>
             </ul>
         </div>
-        <div class="flex gap-[.6250rem] mt-6">
-            <button *ngFor="let nosProduitImg of nosProduitsImg; let i = index" class=" w-4 h-[3px] color" (click)="setIndexImg(i)" [ngClass]="i === indexImg ? 'bg-primary-light' : 'bg-white/50'"></button>
+        <div class="w-full h-[20px] mt-6 relative px-[]">
+            <div class="flex gap-[.6250rem] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <button *ngFor="let num of numOfbtn; let i = index" class=" w-4 h-[3px] color" (click)="setIndexImg(i)" [ngClass]="i === indexImg ? 'bg-primary-light' : 'bg-white/50'"></button>
+            </div>
+            <!-- only display on big screen -->
+            <div *ngIf="marginRight!==10 && numOfbtn.length>3" class="flex gap-1 absolute right-0 px-[1.25rem] md:px-[2.1rem]">
+                <button class="hover:text-primary-light hover:cursor-pointer"  [ngClass]="indexImg === 0 ? 'pointer-events-none' : 'text-primary-light'" (click)="setIndexImg(indexImg-1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>                 
+                </button>
+                <button class="hover:text-primary-light hover:cursor-pointer" [ngClass]="indexImg === (chromaImg.length - 3) ? 'pointer-events-none' : 'text-primary-light'" (click)="setIndexImg(indexImg+1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg> 
+                </button>
+            </div>
+        </div>
+    </div>
+    <div #container2 class="mt-[1.875rem] w-full flex flex-col items-center" [ngClass]="typeCollection[2].onIt === true ? 'block' : 'hidden'">
+        <div class="px-[1.25rem] md:px-[2.1rem] overflow-hidden max-w-[85.625rem]">
+            <ul #carousel2 class="flex overflow-hidden h-full w-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
+                <li *ngFor="let Img of Accessoires; let i = index" #firstImg2 class="relative w-full shrink-0 md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img" [ngClass]="{
+                    'mr-[0px]': i === Accessoires.length - 1,
+                    'mr-[10px] md:mr-[25px] lg:mr-[40px]': i !== Accessoires.length - 1,
+                    }">
+                    <img [src]="Img.imgUrl" alt="" class="object-cover w-full" draggable="false">
+                    <div class="px-[.625rem] py-[.625rem] md:px-4 md:py-4 lg:px-[1.25rem] lg:py-[1.25rem] text-[.75rem] md:text-[1rem] lg:text-[1.25rem] leading-4 md:leading-5 group-hover/img:translate-y-[-2.8125rem] transition-transform duration-200 bg-primary-black">
+                        <p class="font-cairo font-bold">{{Img.title}}</p>
+                        <p class="font-cairo mt-1 md:mt-[.375rem]">{{Img.subtitle}}</p>
+                    </div>
+                    <div class="absolute left-0 bottom-0 right-0 overflow-hidden">
+                        <div class="px-[1.25rem] transform translate-y-full transition-transform duration-200 group-hover/img:translate-y-0 w-full group/btn">
+                            <button class=" font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] group-hover/btn:text-white group-hover/btn:bg-[#101e35] "> AJOUTER AU PANIER</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="w-full h-[20px] mt-6 relative px-[]">
+            <div class="flex gap-[.6250rem] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <button *ngFor="let num of numOfbtn; let i = index" class=" w-4 h-[3px] color" (click)="setIndexImg(i)" [ngClass]="i === indexImg ? 'bg-primary-light' : 'bg-white/50'"></button>
+            </div>
+            <!-- only display on big screen -->
+            <div *ngIf="marginRight!==10" class="flex gap-1 absolute right-0 px-[1.25rem] md:px-[2.1rem]">
+                <button class="hover:text-primary-light hover:cursor-pointer"  [ngClass]="indexImg === 0 ? 'pointer-events-none' : 'text-primary-light'" (click)="setIndexImg(indexImg-1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>                 
+                </button>
+                <button class="hover:text-primary-light hover:cursor-pointer" [ngClass]="indexImg === (Accessoires.length - 3) ? 'pointer-events-none' : 'text-primary-light'" (click)="setIndexImg(indexImg+1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg> 
+                </button>
+            </div>
         </div>
     </div>
     <div class="mt-8">fd</div>
