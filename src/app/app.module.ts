@@ -16,6 +16,8 @@ import { RightArrowComponent } from './logoSVG/right-arrow/right-arrow.component
 import { ShopBannerComponent } from './features/shop/shop-section/shop-banner/shop-banner.component';
 import { ShopPartenairesComponent } from './features/shop/shop-section/shop-partenaires/shop-partenaires.component';
 import { ShopDerniereCollectionComponent } from './features/shop/shop-section/shop-derniere-collection/shop-derniere-collection.component';
+import { ShopBundleComponent } from './features/shop/shop-section/shop-bundle/shop-bundle.component';
+import { ShopEditorialComponent } from './features/shop/shop-section/shop-editorial/shop-editorial.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ShopDerniereCollectionComponent } from './features/shop/shop-section/sh
     ShopBannerComponent,
     ShopPartenairesComponent,
     ShopDerniereCollectionComponent,
+    ShopBundleComponent,
+    ShopEditorialComponent,
   ],
   imports: [
     BrowserModule,
