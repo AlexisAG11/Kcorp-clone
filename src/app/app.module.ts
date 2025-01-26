@@ -18,6 +18,7 @@ import { ShopPartenairesComponent } from './features/shop/shop-section/shop-part
 import { ShopDerniereCollectionComponent } from './features/shop/shop-section/shop-derniere-collection/shop-derniere-collection.component';
 import { ShopBundleComponent } from './features/shop/shop-section/shop-bundle/shop-bundle.component';
 import { ShopEditorialComponent } from './features/shop/shop-section/shop-editorial/shop-editorial.component';
+import { ShopProductsComponent } from './features/shop/shop-section/shop-products/shop-products.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ShopEditorialComponent } from './features/shop/shop-section/shop-editor
     ShopDerniereCollectionComponent,
     ShopBundleComponent,
     ShopEditorialComponent,
+    ShopProductsComponent,
   ],
   imports: [
     BrowserModule,
