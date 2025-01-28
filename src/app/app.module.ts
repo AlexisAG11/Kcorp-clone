@@ -22,6 +22,7 @@ import { ShopProductsComponent } from './features/shop/shop-section/shop-product
 import { ShopKcorpComponent } from './features/shop/shop-section/shop-kcorp/shop-kcorp.component';
 import { ShopVideoComponent } from './features/shop/shop-section/shop-video/shop-video.component';
 import { ShopInstagramComponent } from './features/shop/shop-section/shop-instagram/shop-instagram.component';
+import { ShopNewsletterComponent } from './features/shop/shop-section/shop-newsletter/shop-newsletter.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ShopInstagramComponent } from './features/shop/shop-section/shop-instag
     ShopKcorpComponent,
     ShopVideoComponent,
     ShopInstagramComponent,
+    ShopNewsletterComponent,
   ],
   imports: [
     BrowserModule,
