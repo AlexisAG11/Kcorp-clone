@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { activitiesUrl } from 'twilio/lib/jwt/taskrouter/util';
 
 @Component({
   selector: 'app-shop-products',
@@ -70,53 +71,55 @@ Accessoires = [
 
   autoSlide() {
 
+    this.positionDiff = Math.abs(this.positionDiff);
+    let firstImgWidth = this.mainFirstImg.getBoundingClientRect().width + this.marginRight;
+
+    // all the way to the right, don't need to smooth scroll
     if (this.mainCarousel.scrollLeft == (this.mainCarousel.scrollWidth - this.mainCarousel.clientWidth)) {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 768) {
+        this.indexImg = this.Accessoires.length-1
+      } 
+      else {
+        this.indexImg = this.Accessoires.length-3;
+      }
       return;
     } 
 
-
-    this.positionDiff = Math.abs(this.positionDiff);
-    // let marginRightCalc = (this.container.getBoundingClientRect().width - this.firstImg.getBoundingClientRect().width)/2;
-    let firstImgWidth = this.mainFirstImg.getBoundingClientRect().width + this.marginRight;
-    console.log(firstImgWidth);
-    let valDifference = firstImgWidth - this.positionDiff;
+    // all the way to the left, don't need to smooth scroll
+    if (this.mainCarousel.scrollLeft === 0) {
+      this.indexImg = 0;
+      return;
+    } 
 
     // right
     if (this.mainCarousel.scrollLeft > this.prevScrollLeft) {
       // full on the right don't go further
+      if (this.indexImg === this.Accessoires.length-1) return
       if (this.positionDiff > firstImgWidth / 3) {
-        // const targetScrollLeft = this.mainCarousel.scrollLeft + valDifference;
-        this.indexImg++;
-        const targetScrollLeft = firstImgWidth*this.indexImg;
-        this.smoothScroll(targetScrollLeft);
+        const indexSkip = Math.floor(this.positionDiff/firstImgWidth);
+        this.indexImg+= 1+indexSkip;
       }
-      else {
-        // const targetScrollLeft = this.mainCarousel.scrollLeft + (-this.positionDiff)
-        const targetScrollLeft = firstImgWidth*this.indexImg;
-        this.smoothScroll(targetScrollLeft);
-      }
+      const targetScrollLeft = firstImgWidth*this.indexImg;
+      this.smoothScroll(targetScrollLeft);
+      console.log(this.indexImg);
       return
     }
     // left
+    // full on the left don't go further
+    if (this.indexImg === 0) return
     if (this.positionDiff > firstImgWidth / 3) {
-      // full on the left don't go further
-      if (this.indexImg === 0) return
-      // const targetScrollLeft = this.mainCarousel.scrollLeft - valDifference;
-      this.indexImg--;
-      const targetScrollLeft = firstImgWidth*this.indexImg;
-      this.smoothScroll(targetScrollLeft);
+      const indexSkip = Math.floor(this.positionDiff/firstImgWidth);
+      this.indexImg+= -1-indexSkip;
     }
-    else {
-      if (this.indexImg === 0) return
-      // const targetScrollLeft = this.mainCarousel.scrollLeft - (-this.positionDiff)
-      const targetScrollLeft = firstImgWidth*this.indexImg;
-      this.smoothScroll(targetScrollLeft);
-    }
+    const targetScrollLeft = firstImgWidth*this.indexImg;
+    this.smoothScroll(targetScrollLeft);
+    
   }
 
   onMouseUp(e: MouseEvent | TouchEvent) {
     this.isDrageStart = false;
-
+    console.log(this.isDragging)
     if (!this.isDragging) return;
     this.isDragging = false;
     this.autoSlide();
@@ -163,7 +166,7 @@ Accessoires = [
     this.smoothScroll(targetScrollLeft);
   }
 
-  updateBasedOnWidth(index: number) {
+  updateBasedOnWidth(index: number, isInit: boolean) {
     const screenWidth = window.innerWidth;
 
     if (screenWidth < 768) {
@@ -183,10 +186,19 @@ Accessoires = [
       }
       this.numOfbtn = Array.from({ length: count }, (_, i) => i + 1);
     }
+    if (!isInit) {
+      this.indexImg = index;
+      this.smoothScroll(this.indexImg);
+    }
   }
 
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event): void {
+      this.updateBasedOnWidth(0, false);
+    }
+
   ngOnInit(): void {
-    this.updateBasedOnWidth(0)
+    this.updateBasedOnWidth(0, true);
   }
 
 

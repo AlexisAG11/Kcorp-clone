@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-shop-derniere-collection',
@@ -54,21 +54,21 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
         this.mainCarousel = this.carousel0;
         this.mainFirstImg = this.firstImg0;
         this.indexImg = 0;
-        this.updateBasedOnWidth(indexNew);
+        this.updateBasedOnWidth(indexNew, false);
         this.smoothScroll(0);
       } 
       if (indexNew === 1) {
         this.mainCarousel = this.carousel1;
         this.mainFirstImg = this.firstImg1;
         this.indexImg = 0;
-        this.updateBasedOnWidth(indexNew);
+        this.updateBasedOnWidth(indexNew, false);
         this.smoothScroll(0);
       } 
       if (indexNew === 2) {
         this.mainCarousel = this.carousel2;
         this.mainFirstImg = this.firstImg2;
         this.indexImg = 0;
-        this.updateBasedOnWidth(indexNew);
+        this.updateBasedOnWidth(indexNew, false);
         this.smoothScroll(0);
       } 
     }
@@ -139,51 +139,53 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   }
 
   autoSlide() {
+    
+    this.positionDiff = Math.abs(this.positionDiff);
+    let firstImgWidth = this.mainFirstImg.getBoundingClientRect().width + this.marginRight;
 
+    // all the way to the right, don't need to smooth scroll
     if (this.mainCarousel.scrollLeft == (this.mainCarousel.scrollWidth - this.mainCarousel.clientWidth)) {
+      const indexFind = this.typeCollection.findIndex(item => item.onIt === true);
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 768) {
+        this.indexImg = this.typeCollection[indexFind].array.length-1
+      } 
+      else {
+        this.indexImg = this.typeCollection[indexFind].array.length-3;
+      }
       return;
     } 
 
+    // all the way to the left, don't need to smooth scroll
+    if (this.mainCarousel.scrollLeft === 0) {
+      this.indexImg = 0;
+      return;
+    }
 
-    this.positionDiff = Math.abs(this.positionDiff);
-    // let marginRightCalc = (this.container.getBoundingClientRect().width - this.firstImg.getBoundingClientRect().width)/2;
-    let firstImgWidth = this.mainFirstImg.getBoundingClientRect().width + this.marginRight;
-    console.log(firstImgWidth);
-    let valDifference = firstImgWidth - this.positionDiff;
+
 
     // right
     if (this.mainCarousel.scrollLeft > this.prevScrollLeft) {
       // full on the right don't go further
       if (this.indexImg === this.nosProduitsImg.length-1) return
       if (this.positionDiff > firstImgWidth / 3) {
-        // const targetScrollLeft = this.mainCarousel.scrollLeft + valDifference;
-        this.indexImg++;
-        const targetScrollLeft = firstImgWidth*this.indexImg;
-        this.smoothScroll(targetScrollLeft);
+        const indexSkip = Math.floor(this.positionDiff/firstImgWidth);
+        this.indexImg+= 1+indexSkip;
       }
-      else {
-        if (this.indexImg === this.nosProduitsImg.length-1) return
-        // const targetScrollLeft = this.mainCarousel.scrollLeft + (-this.positionDiff)
-        const targetScrollLeft = firstImgWidth*this.indexImg;
-        this.smoothScroll(targetScrollLeft);
-      }
+      const targetScrollLeft = firstImgWidth*this.indexImg;
+      this.smoothScroll(targetScrollLeft);
       return
     }
     // left
+    // full on the left don't go further
+    if (this.indexImg === 0) return
     if (this.positionDiff > firstImgWidth / 3) {
-      // full on the left don't go further
-      if (this.indexImg === 0) return
-      // const targetScrollLeft = this.mainCarousel.scrollLeft - valDifference;
-      this.indexImg--;
-      const targetScrollLeft = firstImgWidth*this.indexImg;
-      this.smoothScroll(targetScrollLeft);
+      const indexSkip = Math.floor(this.positionDiff/firstImgWidth);
+      this.indexImg+= -1-indexSkip;
     }
-    else {
-      if (this.indexImg === 0) return
-      // const targetScrollLeft = this.mainCarousel.scrollLeft - (-this.positionDiff)
-      const targetScrollLeft = firstImgWidth*this.indexImg;
-      this.smoothScroll(targetScrollLeft);
-    }
+    const targetScrollLeft = firstImgWidth*this.indexImg;
+    this.smoothScroll(targetScrollLeft);
+    
   }
 
   onMouseUp(e: MouseEvent | TouchEvent) {
@@ -237,7 +239,7 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     this.smoothScroll(targetScrollLeft);
   }
 
-  updateBasedOnWidth(index: number) {
+  updateBasedOnWidth(index: number, isInit: boolean) {
     const screenWidth = window.innerWidth;
 
     if (screenWidth < 768) {
@@ -257,10 +259,19 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
       }
       this.numOfbtn = Array.from({ length: count }, (_, i) => i + 1);
     }
+    if (!isInit) {
+      this.indexImg = 0;
+      this.smoothScroll(this.indexImg);
+    }
   }
 
+    @HostListener ('window:resize', ['$event'])
+    onResize(event: Event): void {
+      this.updateBasedOnWidth(0, false);
+    }
+
   ngOnInit(): void {
-    this.updateBasedOnWidth(0)
+    this.updateBasedOnWidth(0, true)
   }
 
 

@@ -1,0 +1,10 @@
+<div class="mt-[7.5rem] border-y-[.0625rem] border-[#4f5264] bg-primary-black w-full h-full">
+    <div class="w-full h-full overflow-hidden">
+        <ul class="keen-slider flex py-[3.125rem]" #sliderRefKc>
+            <li *ngFor="let k of kc; let i = index" class="keen-slider__slide number-slide{{ i + 1 }}  flex items-center justify-center h-full">
+                <img class="object-cover" [src]="k.link" alt="">
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="mt-10">vfd</div>
