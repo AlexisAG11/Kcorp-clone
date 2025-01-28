@@ -20,6 +20,7 @@ import { ShopBundleComponent } from './features/shop/shop-section/shop-bundle/sh
 import { ShopEditorialComponent } from './features/shop/shop-section/shop-editorial/shop-editorial.component';
 import { ShopProductsComponent } from './features/shop/shop-section/shop-products/shop-products.component';
 import { ShopKcorpComponent } from './features/shop/shop-section/shop-kcorp/shop-kcorp.component';
+import { ShopVideoComponent } from './features/shop/shop-section/shop-video/shop-video.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ShopKcorpComponent } from './features/shop/shop-section/shop-kcorp/shop
     ShopEditorialComponent,
     ShopProductsComponent,
     ShopKcorpComponent,
+    ShopVideoComponent,
   ],
   imports: [
     BrowserModule,
