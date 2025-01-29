@@ -23,6 +23,7 @@ import { ShopKcorpComponent } from './features/shop/shop-section/shop-kcorp/shop
 import { ShopVideoComponent } from './features/shop/shop-section/shop-video/shop-video.component';
 import { ShopInstagramComponent } from './features/shop/shop-section/shop-instagram/shop-instagram.component';
 import { ShopNewsletterComponent } from './features/shop/shop-section/shop-newsletter/shop-newsletter.component';
+import { FooterPaiementListSvgComponent } from './layout/footer/footer-paiement-list-svg/footer-paiement-list-svg.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ShopNewsletterComponent } from './features/shop/shop-section/shop-newsl
     ShopVideoComponent,
     ShopInstagramComponent,
     ShopNewsletterComponent,
+    FooterPaiementListSvgComponent,
   ],
   imports: [
     BrowserModule,

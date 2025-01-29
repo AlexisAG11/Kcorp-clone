@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  isCatalogue: boolean = false;
+  isInformations: boolean = false;
+  
+
+  onCatalogue(){
+    this.isCatalogue = !this.isCatalogue;
+  }
+  onInformations(){
+    this.isInformations = !this.isInformations;
+  }
+
 }
