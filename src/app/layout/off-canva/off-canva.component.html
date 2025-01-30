@@ -1,0 +1,210 @@
+<div class="fixed z-[100] top-0 left-0 w-full h-full" [ngClass]="{' visible':isMobileMenu, ' invisible pointer-events-none': !isMobileMenu}">
+    <div class="relative w-full h-full">
+        <div class="relative top-0 left-0 w-full h-full font-cairo overflow-y-auto pb-3 md:w-[25rem] bg-primary-black   transition-all duration-300 z-[150]" [ngClass]="{' translate-x-0':isMobileMenu, ' -translate-x-full': !isMobileMenu,
+        }">
+            <div class="flex sticky top-0 justify-between items-center w-full px-[1.25rem] h-[4rem] bg-primary-black z-[2000]">
+                <a routerLink="/">
+                    <img src="assets/images/Kcorp-logo.svg" alt="Logo" width="45">
+                </a>
+                <ul class="flex justify-center items-center gap-4 ">
+                    <li class="cursor-pointer">
+                        <a [routerLink]="">
+                            <app-search-logo class="w-5"></app-search-logo>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="" class="cursor-pointer group">
+                            <span class="bg-primary-light w-5 h-5 rounded-full flex items-center justify-center group-hover:bg-[#101e35]">
+                                <span class="font-cairo text-xs font-bold group-hover:text-white">{{cartValue}}</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="cursor-pointer xl:hidden flex items-center">
+                        <button class="w-full h-full" (click)="onRemoveMenu()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                              </svg>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative z-[1000]" [ngClass]="{' translate-x-0':!isInsideBoutiqueMenu, ' -translate-x-full':isInsideBoutiqueMenu,
+            }">
+                <div class="px-[1.25rem] border-[#4f5264] bg-[#101e35]">
+                    <a routerLink="/" (click)="onRemoveMenu()" class="block uppercase font-bold text-[.875rem] w-full text-start py-[1.25rem] relative text-primary-light">
+                        <p>Accueil</p>
+                    </a>
+                </div>
+                <div class="px-[1.25rem] border-b-[.0625rem] border-[#4f5264] opacity-40 pointer-events-none">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative text-white">
+                        <p>kcorp</p>
+                        <div class="text-white absolute top-[50%]  right-0 translate-y-[-50%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                              </svg>                                     
+                        </div>
+                    </button>
+                </div>
+                <div class="px-[1.25rem] border-b-[.0625rem] border-[#4f5264] opacity-40 pointer-events-none">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative  text-white">
+                        <p>blue heart</p>
+                    </button>
+                </div>
+                <div class="px-[1.25rem] border-b-[.0625rem] border-[#4f5264] opacity-40 pointer-events-none">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative text-white">
+                        <p>partenaires</p>
+                    </button>
+                </div>
+                <div class="px-[1.25rem]">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative text-primary-light" (click)="onBoutiqueMenu()">
+                        <p>boutique</p>
+                        <div class="text-white absolute top-[50%]  right-0 translate-y-[-50%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                              </svg>                                     
+                        </div>
+                    </button>
+                </div>
+                <div class="px-[1.25rem] bg-[#101e35] border-b-[.125rem] border-primary-black opacity-40 pointer-events-none">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative text-primary-light flex gap-2">
+                        <app-user-logo class="w-5"></app-user-logo>
+                        <p>compte</p>
+                    </button>
+                </div>
+                <div class="px-[1.25rem] bg-[#101e35] opacity-40 pointer-events-none">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative text-primary-light flex gap-2">
+                        <app-heart-logo class="w-5"></app-heart-logo>
+                        <p>wishlist</p>
+                    </button>
+                </div>
+                <div class="mt-5 pl-5 opacity-40 pointer-events-none">
+                    <ul class="text-[.75rem] text-white">
+                        <li class="mt-[.9375rem]">
+                            <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                FAQ 
+                            </a>
+                        </li>
+                        <li class="mt-[.9375rem]">
+                            <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                Contact 
+                            </a>
+                        </li>
+                        <li class="mt-[.9375rem]">
+                            <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                Mentions Légales 
+                            </a>
+                        </li>
+                        <li class="mt-[.9375rem]">
+                            <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                Conditions Générales de Vente
+                            </a>
+                        </li>
+                        <li class="mt-[.9375rem]">
+                            <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                Politique de Condidentialité
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+<!-- 
+*
+*
+*
+
+
+            BOUTIQUE MENU
+
+*
+*
+*
+ -->
+
+            <div class="absolute top-[4rem] left-0  z-[1000] text-white w-full transition-all duration-300 pb-[2.5rem]" [ngClass]="{' translate-x-full':!isInsideBoutiqueMenu, ' translate-x-0':isInsideBoutiqueMenu,
+            }">
+                <div class="h-[3.125rem] border-[#4f5264] bg-[#101e35]">
+                    <button (click)="goBackMenu()" class="uppercase font-bold text-[.875rem] w-full flex relative text-primary-light h-full items-center">
+                        <div class="w-[3.125rem] h-full border-r-[.125rem] border-primary-black flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                            </svg>       
+                        </div>
+                        <p class="pl-5">Retour</p>
+                    </button>
+                </div>
+                <div class="px-[1.25rem] border-b-[.0625rem] border-[#4f5264]">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative text-primary-light " (click)="onCollectionMenu()">
+                        <p>Nos  collections</p>
+                        <div class="text-white absolute top-[50%]  right-0 translate-y-[-50%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>            
+                        </div>
+                    </button>
+                    <div class="pb-[.9375rem] pl-1" [ngClass]="isCollection ? 'block':'hidden'">
+                        <ul class="text-[.75rem] text-white">
+                            <li *ngFor="let collec of nosCollections; let i = index" class="" [ngClass]="i===0 ? '' : 'mt-[1.25rem]'">
+                                <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                    {{collec}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="px-[1.25rem]">
+                    <button class="uppercase font-bold text-[.875rem] w-full h-full text-start py-[1.25rem] relative text-primary-light " (click)="onAccessoiresMenu()">
+                        <p>Accessoires</p>
+                        <div class="text-white absolute top-[50%]  right-0 translate-y-[-50%]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>            
+                        </div>
+                    </button>
+                    <div class="pb-[.9375rem] pl-1" [ngClass]="isAccessoire ? 'block':'hidden'">
+                        <ul class="text-[.75rem] text-white">
+                            <li *ngFor="let access of Accessoires; let i = index" class="" [ngClass]="i===0 ? '' : 'mt-[1.25rem]'">
+                                <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                    {{access}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex font-cairo font-bold px-5 gap-[.625rem] mt-[1.25rem]">
+                    <a href="" class="relative w-full h-0 pb-[34.72%] order-1 group/1 overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/1:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-70">
+                            <img src="../../../../../assets/images/BANNER_2.webp" alt="" class=" object-cover">
+                        </div>
+                        <div class="absolute top-0 left-0 right-0 bottom-0">
+                            <div class="flex h-full w-full justify-center items-center">
+                                <h3 class="">PRO KIT 2025</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="" class="relative w-full h-0 pb-[34.72%] order-3 md:order-2 group/3 overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/3:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-70">
+                            <img src="../../../../../assets/images/POLO.webp" alt="" class="object-cover">
+                        </div>
+                        <div class="absolute top-0 left-0 right-0 bottom-0 ">
+                            <div class="flex h-full w-full justify-center items-center">
+                                <h3 class="">CHROMA</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+<!-- 
+
+
+        OVERLAY
+
+
+ -->
+
+
+        <div class="z-[51] absolute top-0 left-0 w-full h-full bg-black transition-all duration-300" [ngClass]="{' opacity-50 visible':isMobileMenu, ' invisible opacity-0': !isMobileMenu}" (click)="onRemoveMenu()"></div>
+    </div>
+</div>

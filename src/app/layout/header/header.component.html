@@ -17,13 +17,13 @@
                     <app-search-logo class="w-5"></app-search-logo>
                 </a>
             </li>
-            <li class="cursor-pointer">
-                <a [routerLink]="">
+            <li class="">
+                <button class="flex cursor-pointer">
                     <app-heart-logo class="w-5"></app-heart-logo>
-                </a>
+                </button>
             </li>
-            <li class="cursor-pointer hidden xl:block">
-                <a [routerLink]="">
+            <li class="hidden xl:block">
+                <a [routerLink]="" class="flex cursor-pointer">
                     <app-user-logo class="w-5"></app-user-logo>
                 </a>
             </li>
@@ -34,10 +34,10 @@
                     </span>
                 </a>
             </li>
-            <li class="cursor-pointer xl:hidden">
-                <a [routerLink]="">
+            <li class="xl:hidden">
+                <button class="flex cursor-pointer" (click)="onHamburger()">
                     <img src="../../../assets/images/hamburger.svg" class="w-5" alt="">
-                </a>
+                </button>
             </li>
         </ul>
     </nav>
