@@ -145,7 +145,10 @@
                     <div class="pb-[.9375rem] pl-1" [ngClass]="isCollection ? 'block':'hidden'">
                         <ul class="text-[.75rem] text-white">
                             <li *ngFor="let collec of nosCollections; let i = index" class="" [ngClass]="i===0 ? '' : 'mt-[1.25rem]'">
-                                <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300"
+                                [ngClass]="{ 
+                                    'opacity-40 pointer-events-none':(i !== 0)
+                                    }">
                                     {{collec}}
                                 </a>
                             </li>
@@ -164,7 +167,10 @@
                     <div class="pb-[.9375rem] pl-1" [ngClass]="isAccessoire ? 'block':'hidden'">
                         <ul class="text-[.75rem] text-white">
                             <li *ngFor="let access of Accessoires; let i = index" class="" [ngClass]="i===0 ? '' : 'mt-[1.25rem]'">
-                                <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300">
+                                <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300"
+                                [ngClass]="{ 
+                                    'opacity-40 pointer-events-none':true
+                                    }">
                                     {{access}}
                                 </a>
                             </li>
@@ -172,9 +178,9 @@
                     </div>
                 </div>
                 <div class="flex font-cairo font-bold px-5 gap-[.625rem] mt-[1.25rem]">
-                    <a href="" class="relative w-full h-0 pb-[34.72%] order-1 group/1 overflow-hidden">
+                    <a href="" class="relative w-full h-0 pb-[47.94%] order-1 group/1 overflow-hidden">
                         <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/1:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-70">
-                            <img src="../../../../../assets/images/BANNER_2.webp" alt="" class=" object-cover">
+                            <img src="../../../../../assets/images/BANNER_2.webp" alt="" class=" object-cover w-full h-full">
                         </div>
                         <div class="absolute top-0 left-0 right-0 bottom-0">
                             <div class="flex h-full w-full justify-center items-center">
@@ -182,9 +188,9 @@
                             </div>
                         </div>
                     </a>
-                    <a href="" class="relative w-full h-0 pb-[34.72%] order-3 md:order-2 group/3 overflow-hidden">
+                    <a href="" class="relative w-full h-0 pb-[47.94%] order-3 md:order-2 group/3 overflow-hidden">
                         <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/3:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-70">
-                            <img src="../../../../../assets/images/POLO.webp" alt="" class="object-cover">
+                            <img src="../../../../../assets/images/POLO.webp" alt="" class="object-cover w-full h-full">
                         </div>
                         <div class="absolute top-0 left-0 right-0 bottom-0 ">
                             <div class="flex h-full w-full justify-center items-center">

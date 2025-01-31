@@ -1,14 +1,88 @@
-<header class=" h-24 z-50 w-full sm:px-8 px-4 border-b border-[#4f5264] sticky top-0" [ngClass]="!scrolled ? ['bg-transparent', 'border-none'] : 'bg-primary-black'">
+<header class=" h-24 z-50 w-full sm:px-8 px-4 border-b border-[#4f5264] sticky top-0"
+[ngClass]="{ 
+    'bg-transparent border-none': !scrolled && !inBoutique, 
+    'bg-primary-black': scrolled || inBoutique,
+    }">
     <nav class="flex justify-between items-center h-full">
         <a routerLink="/">
             <img src="assets/images/Kcorp-logo.svg" alt="Logo" width="60">
         </a>
-        <ul class="justify-center items-center gap-10 hidden xl:flex">
-            <li *ngFor="let nav of navLink">
-                <a [routerLink]="nav.href" class="text-sm font-nippo hover:text-primary-light cursor-pointer" [ngClass]="
-                nav.label==='BOUTIQUE' ? 'text-primary-light' : 'text-white'">
-                    {{nav.label}}
+        <ul class="justify-center items-center gap-10 hidden xl:flex h-full">
+            <li *ngFor="let nav of navLink; let i = index" class="h-full xl:flex" [ngClass]="{'group': i === 3}" (mouseenter)="onHover(true,i)" (mouseleave)="onHover(false,i)">
+                <a [routerLink]="nav.href" class="text-sm font-nippo hover:text-primary-light cursor-pointer h-full flex items-center border-b-2 border-transparent " [ngClass]="nav.label==='BOUTIQUE' ? 'text-primary-light' : 'text-white'"
+                [ngClass]="{ 
+                    'text-primary-light': nav.label==='BOUTIQUE', 
+                    'text-white': nav.label!=='BOUTIQUE',
+                    'border-b-primary-light':(i === 3 && inBoutique),
+                    'text-gray-400 pointer-events-none':(i === 1 || i === 2)
+                    }"
+                >
+                    <p>{{nav.label}}</p>
                 </a>
+                <div class="absolute top-[101%] left-0 right-0 bg-primary-black hidden group-hover:flex justify-center py-5">
+                    <div class="w-[80rem] flex justify-between ">
+                        <div>
+                            <div class="pb-[.9375rem] pl-1" [ngClass]="true ? 'block':'hidden'">
+                                <ul class="text-[.875rem] font-cairo text-white">
+                                    <li>
+                                        <a href="" class="cursor-pointer text-primary-light font-bold uppercase">
+                                            nos collections
+                                        </a>
+                                    </li>
+                                    <li *ngFor="let collec of nosCollections; let i = index" class="mt-[1.25rem]">
+                                        <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300"
+                                        [ngClass]="{ 
+                                            'text-gray-400 pointer-events-none':(i !== 0)
+                                            }">
+                                            {{collec}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="pb-[.9375rem] pl-1" [ngClass]="true ? 'block':'hidden'">
+                                <ul class="text-[.875rem] font-cairo text-white">
+                                    <li>
+                                        <a href="" class="cursor-pointer text-primary-light font-bold uppercase">
+                                            Accessoires
+                                        </a>
+                                    </li>
+                                    <li *ngFor="let access of Accessoires; let i = index" class="mt-[1.25rem]" >
+                                        <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300"
+                                        [ngClass]="{ 
+                                            'text-gray-400 pointer-events-none':true
+                                            }">
+                                            {{access}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex font-cairo font-bold px-5 gap-[2rem] items-center text-white text-2xl">
+                            <a href="" class="relative w-[35rem] h-0 pb-[47.94%] order-1 group/1 overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/1:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-50">
+                                    <img src="../../../assets/images/BANNER_2.webp" alt="" class=" object-cover w-full h-full">
+                                </div>
+                                <div class="absolute top-0 left-0 right-0 bottom-0">
+                                    <div class="flex h-full w-full justify-center items-center">
+                                        <h3 class="group-hover/1:text-primary-light transition-all">PRO KIT 2025</h3>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" class="relative w-full h-0 pb-[47.94%] order-3 md:order-2 group/3 overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/3:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-50">
+                                    <img src="../../../assets/images/POLO.webp" alt="" class="object-cover w-full h-full">
+                                </div>
+                                <div class="absolute top-0 left-0 right-0 bottom-0 ">
+                                    <div class="flex h-full w-full justify-center items-center">
+                                        <h3 class="group-hover/3:text-primary-light transition-all">CHROMA</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
         <ul class="flex justify-center items-center gap-4 ">

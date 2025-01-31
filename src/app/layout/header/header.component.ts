@@ -18,6 +18,29 @@ export class HeaderComponent {
     {href: 'boutique', label: 'BOUTIQUE'},
   ]
 
+  nosCollections = [
+    "Pro Kit 2025",
+    "Finally Home",
+    "Baseball",
+    "Essentials",
+    "Worlds 2024",
+    "Pro Kit",
+    "Légende du club",
+    "Nos produits",
+  ]
+
+  Accessoires = [
+    "KCX 4",
+    "Rhinoshield",
+    "celio x Karmine Corp",
+    "Quersus",
+    "Worlds 2024",
+    "Logitech",
+    "Piece of History",
+  ]
+  
+  inBoutique = false;
+
   cartCounter=0;
 
   scrolled = false;
@@ -37,4 +60,11 @@ export class HeaderComponent {
     // this.isMobileMenu = true;
     this.generalService.isMobileMenu.next(true);
   }
+
+  onHover(value: boolean,i :number){
+    if (i == 3) {
+      this.inBoutique = value;
+    }
+    console.log(this.inBoutique);
+    }
 }
