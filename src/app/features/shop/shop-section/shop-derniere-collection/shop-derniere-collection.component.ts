@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-derniere-collection',
@@ -8,14 +9,14 @@ import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild }
 
 export class ShopDerniereCollectionComponent implements AfterViewInit {
 
-
+  constructor(private router: Router) {}
 
   nosProduitsImg = [
-    {imgUrl: '../../../../../assets/images/4_2025.webp', title: ' Maillot Pro 2025', subtitle: 'Dès €80,00'},
-    {imgUrl: '../../../../../assets/images/Frontultra.webp' , title: ' Maillot Ultra 2025', subtitle: '€65,00'},
-    {imgUrl: '../../../../../assets/images/Marteen_Veste.webp' , title: ' Veste Pro Kit 2025', subtitle: '€90,00'},
-    {imgUrl: '../../../../../assets/images/JoggFront2025.webp', title: ' Jogging Pro Kit 2025', subtitle: '€60,00'},
-    {imgUrl: '../../../../../assets/images/DUO_LOL_1.webp' , title: ' Précommande - Maillot League Of its Own', subtitle: 'Dès €75,00'},
+    {imgUrl: '../../../../../assets/images/4_2025.webp', title: 'Maillot Pro 2025', subtitle: 'Dès €80,00'},
+    {imgUrl: '../../../../../assets/images/Frontultra.webp' , title: 'Maillot Ultra 2025', subtitle: '€65,00'},
+    {imgUrl: '../../../../../assets/images/Marteen_Veste.webp' , title: 'Veste Pro Kit 2025', subtitle: '€90,00'},
+    {imgUrl: '../../../../../assets/images/JoggFront2025.webp', title: 'Jogging Pro Kit 2025', subtitle: '€60,00'},
+    {imgUrl: '../../../../../assets/images/DUO_LOL_1.webp' , title: 'Précommande - Maillot League Of its Own', subtitle: 'Dès €75,00'},
     {imgUrl: '../../../../../assets/images/Ava_1.webp' , title: 'Polo Chroma Noir', subtitle: '€70,00'},
   ]
 
@@ -270,8 +271,23 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
       this.updateBasedOnWidth(0, false);
     }
 
+
+    onClickProduct(name: string){
+      console.log('clic')
+      const routerName = name.replace(/ /g, "-");
+      this.router.navigate([`/products/${routerName}`]);
+    }
+
   ngOnInit(): void {
     this.updateBasedOnWidth(0, true)
+  }
+
+  onTouchProduct(n:string){
+    if (!this.isDragging){
+      console.log('hey');
+      this.onClickProduct(n)
+    }
+    
   }
 
 

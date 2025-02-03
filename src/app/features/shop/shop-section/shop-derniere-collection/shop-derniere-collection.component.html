@@ -10,12 +10,13 @@
     </div>
     <div #container0 class="mt-[1.875rem] w-full flex flex-col items-center" [ngClass]="typeCollection[0].onIt === true ? 'block' : 'hidden'">
         <div class="w-full px-[1.25rem] md:px-[2.1rem] overflow-hidden max-w-[85.625rem]">
-            <ul #carousel0 class="flex overflow-hidden h-full w-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
+            
+            <ul #carousel0 class="flex overflow-hidden h-full w-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)">
                 <li *ngFor="let nosProduitImg of nosProduitsImg; let i = index" #firstImg0 class=" relative w-full shrink-0  md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img"   [ngClass]="{
                     'mr-[0px]': i === nosProduitsImg.length - 1,
                     'mr-[10px] md:mr-[25px] lg:mr-[40px]': i !== nosProduitsImg.length - 1,
                     }">
-                    <img [src]="nosProduitImg.imgUrl" alt="" class="object-cover w-full" draggable="false">
+                    <img [src]="nosProduitImg.imgUrl" alt="" class="object-cover w-full cursor-pointer" (click)="onClickProduct(nosProduitImg.title)" (touchend)="onTouchProduct(nosProduitImg.title)" draggable="false">
                     <div class="px-[.625rem] py-[.625rem] md:px-4 md:py-4 lg:px-[1.25rem] lg:py-[1.25rem] text-[.75rem] md:text-[1rem] lg:text-[1.25rem] leading-4 md:leading-5 group-hover/img:translate-y-[-2.8125rem] transition-transform duration-200 bg-primary-black">
                         <p class="font-cairo font-bold">{{nosProduitImg.title}}</p>
                         <p class="font-cairo mt-1 md:mt-[.375rem]">{{nosProduitImg.subtitle}}</p>

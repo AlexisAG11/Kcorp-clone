@@ -31,6 +31,7 @@ import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from '@angular/material/slider';
 import {MatRippleModule, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 import { ChromaComponent } from './features/collections/chroma/chroma.component';
+import { MaillotPro2025Component } from './features/products/maillot-pro-2025/maillot-pro-2025.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ChromaComponent } from './features/collections/chroma/chroma.component'
     FooterPaiementListSvgComponent,
     OffCanvaComponent,
     ProKit2025Component,
-    ChromaComponent
+    ChromaComponent,
+    MaillotPro2025Component
   ],
   imports: [
     BrowserModule,
