@@ -35,10 +35,11 @@
                                     </li>
                                     <li *ngFor="let collec of nosCollections; let i = index" class="mt-[1.25rem]">
                                         <a  class="cursor-pointer hover:text-primary-light transition-all duration-300"
-                                        [ngClass]="{ 
-                                            'text-gray-400 pointer-events-none':(i !== 0)
-                                            }"
-                                        [routerLink]="i === 0 ? '/collections/prokit2025' : null"
+                                        [ngClass]="{
+                                            'text-white': (i === 0 || i === 1),
+                                            'text-gray-400 pointer-events-none': i !== 0 && i !== 1
+                                          }"
+                                        [routerLink]="i === 0 ? '/collections/prokit2025' : (i === 1 ? '/collections/chroma' : null)"
                                         (click)="hideInBoutique()">
                                             {{collec}}
                                         </a>
@@ -76,7 +77,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="" class="relative w-full h-0 pb-[47.94%] order-3 md:order-2 group/3 overflow-hidden">
+                            <a routerLink="/collections/chroma" (click)="hideInBoutique()" class="relative w-full h-0 pb-[47.94%] order-3 md:order-2 group/3 overflow-hidden">
                                 <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/3:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-50">
                                     <img src="../../../assets/images/POLO.webp" alt="" class="object-cover w-full h-full">
                                 </div>

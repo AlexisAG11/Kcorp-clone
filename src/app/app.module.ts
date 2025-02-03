@@ -30,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from '@angular/material/slider';
 import {MatRippleModule, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
+import { ChromaComponent } from './features/collections/chroma/chroma.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {MatRippleModule, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/cor
     ShopNewsletterComponent,
     FooterPaiementListSvgComponent,
     OffCanvaComponent,
-    ProKit2025Component
+    ProKit2025Component,
+    ChromaComponent
   ],
   imports: [
     BrowserModule,

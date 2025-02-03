@@ -1,0 +1,15 @@
+mat-slider {
+    --mdc-slider-handle-color: #0cf !important;
+    --mdc-slider-active-track-color: #0cf !important;
+    --mdc-slider-active-track-height: 2px !important;
+    --mdc-slider-handle-width: 10px !important; 
+    --mdc-slider-handle-height: 10px !important; 
+    --mdc-slider-focus-handle-color: #0cf !important; 
+    --mdc-slider-inactive-track-color: rgb(211, 211, 211) !important; 
+    --mdc-slider-inactive-track-height: 2px !important;
+    --mat-mdc-slider-hover-ripple-color: unset !important;
+    --mat-mdc-slider-focus-ripple-color: unset !important;
+    --mat-mdc-slider-value-indicator-width: 40px !important;
+    width: 100%;
+    margin:0;
+  }

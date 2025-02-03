@@ -17,7 +17,7 @@ export class OffCanvaComponent implements OnInit {
 
   nosCollections = [
     "Pro Kit 2025",
-    "Finally Home",
+    "Chroma",
     "Baseball",
     "Essentials",
     "Worlds 2024",
