@@ -25,6 +25,11 @@ import { ShopInstagramComponent } from './features/shop/shop-section/shop-instag
 import { ShopNewsletterComponent } from './features/shop/shop-section/shop-newsletter/shop-newsletter.component';
 import { FooterPaiementListSvgComponent } from './layout/footer/footer-paiement-list-svg/footer-paiement-list-svg.component';
 import { OffCanvaComponent } from './layout/off-canva/off-canva.component';
+import { ProKit2025Component } from './features/collections/pro-kit2025/pro-kit2025.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from "@angular/forms";
+import { MatSliderModule } from '@angular/material/slider';
+import {MatRippleModule, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -51,12 +56,17 @@ import { OffCanvaComponent } from './layout/off-canva/off-canva.component';
     ShopNewsletterComponent,
     FooterPaiementListSvgComponent,
     OffCanvaComponent,
+    ProKit2025Component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

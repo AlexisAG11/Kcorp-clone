@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { flush } from '@angular/core/testing';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { GeneralServiceService } from 'src/app/general-service.service';
 
 @Component({
@@ -7,9 +8,11 @@ import { GeneralServiceService } from 'src/app/general-service.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  constructor(private generalService: GeneralServiceService){}
+  constructor(private generalService: GeneralServiceService,
+              private router: Router
+  ){}
 
   navLink = [
     {href: '', label: 'ACCUEIL'},
@@ -40,11 +43,12 @@ export class HeaderComponent {
   ]
   
   inBoutique = false;
-
+  disabledHover : boolean = false;
   cartCounter=0;
 
   scrolled = false;
-  // isMobileMenu: boolean = false;
+  bgBlackHeader = true;
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     // Check the scroll position
@@ -65,6 +69,22 @@ export class HeaderComponent {
     if (i == 3) {
       this.inBoutique = value;
     }
-    console.log(this.inBoutique);
-    }
+  }
+
+  hideInBoutique(){
+    this.inBoutique = false;
+  }
+
+  ngOnInit(){
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (event.url == '/'  || event.url == '/boutique') {
+          this.bgBlackHeader = false;
+        }
+        else {
+          this.bgBlackHeader = true;
+        }
+      }
+    });
+  }
 }

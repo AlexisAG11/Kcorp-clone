@@ -1,7 +1,7 @@
 <header class=" h-24 z-50 w-full sm:px-8 px-4 border-b border-[#4f5264] sticky top-0"
 [ngClass]="{ 
-    'bg-transparent border-none': !scrolled && !inBoutique, 
-    'bg-primary-black': scrolled || inBoutique,
+    'bg-transparent border-none': !scrolled && !inBoutique && !bgBlackHeader, 
+    'bg-primary-black': scrolled || inBoutique || bgBlackHeader,
     }">
     <nav class="flex justify-between items-center h-full">
         <a routerLink="/">
@@ -19,7 +19,11 @@
                 >
                     <p>{{nav.label}}</p>
                 </a>
-                <div class="absolute top-[101%] left-0 right-0 bg-primary-black hidden group-hover:flex justify-center py-5">
+                <div class="absolute top-[101%] left-0 right-0 bg-primary-black justify-center py-5"
+                [ngClass]="{ 
+                    'flex': inBoutique,
+                    'hidden': !inBoutique,
+                    }">
                     <div class="w-[80rem] flex justify-between ">
                         <div>
                             <div class="pb-[.9375rem] pl-1" [ngClass]="true ? 'block':'hidden'">
@@ -30,10 +34,12 @@
                                         </a>
                                     </li>
                                     <li *ngFor="let collec of nosCollections; let i = index" class="mt-[1.25rem]">
-                                        <a href="" class="cursor-pointer hover:text-primary-light transition-all duration-300"
+                                        <a  class="cursor-pointer hover:text-primary-light transition-all duration-300"
                                         [ngClass]="{ 
                                             'text-gray-400 pointer-events-none':(i !== 0)
-                                            }">
+                                            }"
+                                        [routerLink]="i === 0 ? '/collections/prokit2025' : null"
+                                        (click)="hideInBoutique()">
                                             {{collec}}
                                         </a>
                                     </li>
@@ -60,7 +66,7 @@
                             </div>
                         </div>
                         <div class="flex font-cairo font-bold px-5 gap-[2rem] items-center text-white text-2xl">
-                            <a href="" class="relative w-[35rem] h-0 pb-[47.94%] order-1 group/1 overflow-hidden">
+                            <a routerLink="/collections/prokit2025" (click)="hideInBoutique()" class="relative w-[35rem] h-0 pb-[47.94%] order-1 group/1 overflow-hidden">
                                 <div class="absolute top-0 left-0 right-0 bottom-0 transform group-hover/1:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.645,0.045,0.355,1)] opacity-50">
                                     <img src="../../../assets/images/BANNER_2.webp" alt="" class=" object-cover w-full h-full">
                                 </div>
