@@ -32,6 +32,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatRippleModule, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 import { ChromaComponent } from './features/collections/chroma/chroma.component';
 import { MaillotPro2025Component } from './features/products/maillot-pro-2025/maillot-pro-2025.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MaillotPro2025Component } from './features/products/maillot-pro-2025/ma
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

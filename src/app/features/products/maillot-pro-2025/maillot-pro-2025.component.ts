@@ -52,6 +52,25 @@ carousel0: any;
     {imgUrl: '../../../../../assets/images/12_2025.webp', title: 'Maillot Pro 2025', subtitle: 'Dès €80,00'},
   ]
 
+  tailleArray = [
+    {taille: 'XS', onIt: false},
+    {taille: 'S', onIt: false},
+    {taille: 'M', onIt: false},
+    {taille: 'L', onIt: false},
+    {taille: 'XL', onIt: false},
+    {taille: '2XL', onIt: false},
+    {taille: '3XL', onIt: false},
+  ]
+
+  onClickTaille(index:number){
+    this.tailleArray.forEach(item => {
+      if (item.onIt === true) {
+          item.onIt = false;
+      }
+      this.tailleArray[index].onIt = true;
+  });
+  }
+
 
   onMouseMove(e: MouseEvent | TouchEvent) {
     if (this.mainCarousel) {

@@ -1,0 +1,52 @@
+/* mat-slide-toggle {
+  --mdc-switch-selected-track-color: white !important;
+  --mdc-switch-unselected-track-color: white !important;
+  --mdc-switch-selected-focus-track-color: white !important;
+  --mdc-switch-selected-hover-track-color: white !important;
+  --mdc-switch-selected-pressed-track-color: white !important;
+  --mdc-switch-disabled-selected-track-color: white !important;
+  --mdc-switch-disabled-unselected-track-outline-color: white !important;
+  --mdc-switch-unselected-focus-track-color: white !important;
+  --mdc-switch-unselected-hover-track-color: white !important;
+  --mdc-switch-unselected-pressed-track-color: white !important;
+
+
+  --mdc-switch-track-outline-color: white !important;
+  --mdc-switch-unselected-icon-color: none !important;
+  --mdc-switch-selected-icon-color: none !important;
+  --mdc-switch-unselected-handle-color: #0cf !important;
+  --mdc-switch-unselected-focus-handle-color: #0cf !important;
+  --mdc-switch-unselected-hover-handle-color: #0cf !important;
+  --mdc-switch-unselected-pressed-handle-color: #0cf !important;
+
+
+  --mdc-switch-selected-handle-color: #0cf !important;
+  --mdc-switch-selected-focus-handle-color: #0cf !important;
+  --mdc-switch-selected-hover-handle-color: #0cf !important;
+  --mdc-switch-selected-pressed-handle-color: #0cf !important;
+  --mdc-switch-disabled-selected-handle-color: #0cf !important;
+  --mdc-switch-disabled-unselected-handle-color: #0cf !important;
+  
+
+}
+
+::ng-deep mat-slide-toggle {
+  width: 42px !important;
+  height: 22px !important;
+}
+::ng-deep mat-slide-toggle .mdc-form-field {
+  width: 100%;
+}
+::ng-deep mat-slide-toggle .mdc-switch.mdc-switch--unselected {
+  width: 100%;
+}
+::ng-deep mat-slide-toggle .mdc-switch.mdc-switch--selected.mdc-switch--checked {
+  width: 100%;
+} */
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}

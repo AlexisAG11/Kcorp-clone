@@ -1,7 +1,6 @@
 <div class="bg-primary-black font-cairo text-white">
     <div #container0 class="pt-[1.875rem] w-full flex flex-col items-center" [ngClass]="true ? 'block' : 'hidden'">
         <div class="w-full px-0 md:px-[2.1rem] overflow-hidden max-w-[85.625rem]">
-            
             <ul #carousel0 class="flex overflow-hidden h-full w-full relative" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)">
                 <li *ngFor="let nosProduitImg of nosProduitsImg; let i = index" #firstImg0 class=" relative w-full shrink-0  md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img"   [ngClass]="{
                     'mr-[0px]': i === nosProduitsImg.length - 1,
@@ -11,6 +10,39 @@
                 </li>
             </ul>
             <div #firstSlider0 class="h-[0.20rem] bg-gray-600 -mt-1 transition-opacity duration-300" [style.width]="'calc(100% / ' + nosProduitsImg.length + ')'" [style.transform]="'translateX(' + translateValue + 'px)'" [ngClass]="displaySlider ? 'opacity-100' : ' opacity-0'"></div>
+        </div>
+    </div>
+    <div class="mt-10 px-[1.25rem]">
+        <div>
+            <div class="text-[0.8125rem] text-[#757575] leading-[1.125rem]">Maillot</div>
+            <div class="uppercase text-2xl font-bold mt-[.25rem] leading-[1.5625rem]">Mailot Pro 2025</div>
+            <p class="text-sm leading-[1.375rem] mt-[.9375rem]">Découvrez le maillot officiel de la saison 2025, conçu pour accompagner nos joueurs sur les plus grandes scènes compétitives mondiales. Avec son design audacieux orné de flammes bleues, ce maillot symbolise la détermination et la passion de la Karmine. Fabriqué à partir de polyester 100% recyclé FL NanoMatter™ en collaboration avec notre nouvel équipementier Fulllife, ce maillot allie technicité et qualité. Grâce à son jacquard exceptionnel et un tissage en nid d’abeille, il offre un équilibre parfait entre légèreté, confort et performance. Chaque détail a été pensé pour offrir un produit unique, à la hauteur de votre engagement.
+            </p>
+        </div>
+        <div class="p-5 mt-[1.875rem] text-[.875rem] border-[.0625rem] border-[#4f5264]">
+            <button class="underline font-bold tracking-[.0625rem] underline-offset-[.25rem] cursor-pointer mb-[1.4375rem]">Guide des tailles</button>
+            <ul class="font-nippo flex flex-wrap gap-[.9375rem]">
+                <li *ngFor="let arr of tailleArray; let i = index" class="w-[2.5rem] h-[2.5rem] ">
+                    <a class=" w-full h-full border-[.0625rem] border-[#4f5264] flex items-center justify-center transition-all duration-300 cursor-pointer hover:bg-primary-light hover:text-black" [ngClass]="arr.onIt === true ? 'bg-primary-light text-black' : 'bg-transparent text-white'" (click)="onClickTaille(i)">{{arr.taille}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="p-5 mt-[1.25rem] text-[.875rem] border-[.0625rem] border-[#4f5264]">
+            <div class="flex">
+                <div class="uppercase font-bold pr-[3.125rem]">personnalise ton maillot (+15€)</div>
+                <div>
+                <div>
+                    <!-- <mat-slide-toggle>
+                    </mat-slide-toggle> -->
+                    <mat-slide-toggle
+                    class="example-margin"
+                    [checked]="false"
+                    [disabled]="false">
+                    Slide me!
+                </mat-slide-toggle>
+                </div>      
+            </div>
+            </div>
         </div>
     </div>
     <app-shop-newsletter class="text-white"></app-shop-newsletter>
