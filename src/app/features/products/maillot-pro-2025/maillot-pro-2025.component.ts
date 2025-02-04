@@ -7,6 +7,9 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 })
 export class MaillotPro2025Component implements OnInit {
 
+
+  isActive = false;
+
 carousel0: any;
   carousel1: any;
   carousel2: any;

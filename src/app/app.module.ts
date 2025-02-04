@@ -33,6 +33,9 @@ import {MatRippleModule, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/cor
 import { ChromaComponent } from './features/collections/chroma/chroma.component';
 import { MaillotPro2025Component } from './features/products/maillot-pro-2025/maillot-pro-2025.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatRadioModule} from '@angular/material/radio';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 
 @NgModule({
   declarations: [
@@ -69,9 +72,12 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     BrowserAnimationsModule,
     FormsModule,
     MatSliderModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatRadioModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

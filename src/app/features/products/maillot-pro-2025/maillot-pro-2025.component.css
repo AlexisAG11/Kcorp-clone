@@ -1,14 +1,14 @@
-/* mat-slide-toggle {
-  --mdc-switch-selected-track-color: white !important;
-  --mdc-switch-unselected-track-color: white !important;
-  --mdc-switch-selected-focus-track-color: white !important;
-  --mdc-switch-selected-hover-track-color: white !important;
-  --mdc-switch-selected-pressed-track-color: white !important;
-  --mdc-switch-disabled-selected-track-color: white !important;
-  --mdc-switch-disabled-unselected-track-outline-color: white !important;
-  --mdc-switch-unselected-focus-track-color: white !important;
-  --mdc-switch-unselected-hover-track-color: white !important;
-  --mdc-switch-unselected-pressed-track-color: white !important;
+mat-slide-toggle {
+  --mdc-switch-selected-track-color: #0cf !important;
+  --mdc-switch-unselected-track-color: black !important;
+  --mdc-switch-selected-focus-track-color: #0cf !important;
+  --mdc-switch-selected-hover-track-color: #0cf !important;
+  --mdc-switch-selected-pressed-track-color: #0cf !important;
+  --mdc-switch-disabled-selected-track-color: black !important;
+  --mdc-switch-disabled-unselected-track-outline-color: black !important;
+  --mdc-switch-unselected-focus-track-color: black !important;
+  --mdc-switch-unselected-hover-track-color: black !important;
+  --mdc-switch-unselected-pressed-track-color: black !important;
 
 
   --mdc-switch-track-outline-color: white !important;
@@ -20,33 +20,52 @@
   --mdc-switch-unselected-pressed-handle-color: #0cf !important;
 
 
-  --mdc-switch-selected-handle-color: #0cf !important;
-  --mdc-switch-selected-focus-handle-color: #0cf !important;
-  --mdc-switch-selected-hover-handle-color: #0cf !important;
-  --mdc-switch-selected-pressed-handle-color: #0cf !important;
-  --mdc-switch-disabled-selected-handle-color: #0cf !important;
-  --mdc-switch-disabled-unselected-handle-color: #0cf !important;
-  
+  --mdc-switch-selected-handle-color: white !important;
+  --mdc-switch-selected-focus-handle-color: white !important;
+  --mdc-switch-selected-hover-handle-color: white !important;
+  --mdc-switch-selected-pressed-handle-color: white !important;
+  --mdc-switch-disabled-selected-handle-color: white !important;
+  --mdc-switch-disabled-unselected-handle-color: white !important;
+
+  --mat-switch-with-icon-handle-size: 16px !important;
+  --mdc-switch-state-layer-size: 16px !important;
+
+  --mat-switch-track-outline-width: 1px !important;
+
+  --mat-switch-unselected-handle-size: 16px !important;
+  --mat-switch-selected-handle-size: 16px !important;
+  --mat-switch-pressed-handle-size: 16px !important;
+  --mat-switch-selected-handle-horizontal-margin:0 23px !important;
+  --mat-switch-selected-with-icon-handle-horizontal-margin:0 23px !important;
+  --mat-switch-selected-pressed-handle-horizontal-margin:0 23px !important;
+  --mat-switch-unselected-with-icon-handle-horizontal-margin:0 4px !important;
+  --mat-switch-unselected-pressed-handle-horizontal-margin:0 4px !important;
 
 }
 
 ::ng-deep mat-slide-toggle {
   width: 42px !important;
   height: 22px !important;
+
 }
 ::ng-deep mat-slide-toggle .mdc-form-field {
   width: 100%;
+  height: 100%;
 }
 ::ng-deep mat-slide-toggle .mdc-switch.mdc-switch--unselected {
   width: 100%;
+  height: 100%;
+
 }
 ::ng-deep mat-slide-toggle .mdc-switch.mdc-switch--selected.mdc-switch--checked {
   width: 100%;
-} */
-
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
+  height: 100%;
+}
+::ng-deep mat-slide-toggle .mdc-switch__track {
+  width: 100%;
+  height: 100%;
+}
+::ng-deep mat-slide-toggle .mdc-switch__handle{
+  width: 100%;
+  height: 100%;
 }

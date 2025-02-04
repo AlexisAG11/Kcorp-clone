@@ -29,20 +29,14 @@
         </div>
         <div class="p-5 mt-[1.25rem] text-[.875rem] border-[.0625rem] border-[#4f5264]">
             <div class="flex">
-                <div class="uppercase font-bold pr-[3.125rem]">personnalise ton maillot (+15€)</div>
+                <div class="uppercase font-bold pr-[3.125rem]">personnalise ton maillot (+15€)
+                </div>
                 <div>
-                <div>
-                    <!-- <mat-slide-toggle>
-                    </mat-slide-toggle> -->
-                    <mat-slide-toggle
-                    class="example-margin"
-                    [checked]="false"
-                    [disabled]="false">
-                    Slide me!
-                </mat-slide-toggle>
-                </div>      
+                    <mat-slide-toggle [(ngModel)]="isActive"></mat-slide-toggle>   
+                </div>
             </div>
-            </div>
+            <div>{{isActive}}</div>
+
         </div>
     </div>
     <app-shop-newsletter class="text-white"></app-shop-newsletter>
