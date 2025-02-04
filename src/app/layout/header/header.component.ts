@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onHover(value: boolean,i :number){
-    if (i == 3) {
+    if (i === 3) {
       this.inBoutique = value;
     }
   }
@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(){
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (event.url == '/'  || event.url == '/boutique') {
+        if (event.url === '/'  || event.url === '/boutique') {
           this.bgBlackHeader = false;
         }
         else {

@@ -75,7 +75,7 @@ Accessoires = [
     let firstImgWidth = this.mainFirstImg.getBoundingClientRect().width + this.marginRight;
 
     // all the way to the right, don't need to smooth scroll
-    if (this.mainCarousel.scrollLeft == (this.mainCarousel.scrollWidth - this.mainCarousel.clientWidth)) {
+    if (this.mainCarousel.scrollLeft === (this.mainCarousel.scrollWidth - this.mainCarousel.clientWidth)) {
       const screenWidth = window.innerWidth;
       if (screenWidth < 768) {
         this.indexImg = this.Accessoires.length-1

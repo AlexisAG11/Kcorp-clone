@@ -145,7 +145,7 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     let firstImgWidth = this.mainFirstImg.getBoundingClientRect().width + this.marginRight;
 
     // all the way to the right, don't need to smooth scroll
-    if (this.mainCarousel.scrollLeft == (this.mainCarousel.scrollWidth - this.mainCarousel.clientWidth)) {
+    if (this.mainCarousel.scrollLeft === (this.mainCarousel.scrollWidth - this.mainCarousel.clientWidth)) {
       const indexFind = this.typeCollection.findIndex(item => item.onIt === true);
       const screenWidth = window.innerWidth;
       if (screenWidth < 768) {
