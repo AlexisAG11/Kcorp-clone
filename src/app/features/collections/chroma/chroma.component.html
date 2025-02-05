@@ -34,7 +34,7 @@
                                                 <span class="absolute bg-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform h-[0.45rem] w-[0.45rem] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></span>
                                             </label>
                                         </div>
-                                        <p class="cursor-pointer" onclick="document.getElementById('check').click();">En stock (2)</p>
+                                        <p class="cursor-pointer" onclick="document.getElementById('check').click();">En stock (0)</p>
                                     </li>
                                     <li class="flex gap-1 items-center cursor-pointer mt-[.3rem]">
                                         <div class="inline-flex items-center">
@@ -198,7 +198,8 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-x-2 gap-y-4 mt-4 md:gap-x-3 md:grid-cols-3 lg:mt-[1.25rem]">
-                        <div *ngFor="let chroma of chromaImg; let i = index" #firstImg0 class=" relative w-full shrink-0 group/img"   [ngClass]="{
+                        <div *ngFor="let chroma of chromaImg; let i = index" #firstImg0 class=" relative w-full shrink-0 group/img opacity-60 pointer-events-none"   
+                            [ngClass]="{
                             'mr-[0px]': i === chromaImg.length - 1,
                             'mr-[10px] md:mr-[25px] lg:mr-[40px]': i !== chromaImg.length - 1,
                             }">

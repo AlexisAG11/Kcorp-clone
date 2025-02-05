@@ -110,7 +110,15 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   numOfbtn : any;
   marginRight : number = 25;
 
+  canIClickProduct = true;
+  hasPassedThroughMouseMove = false;
+  hasPassedThroughMouseDown = false;
+  isOnImage = false;
+
   onMouseMove(e: MouseEvent | TouchEvent) {
+    if (this.hasPassedThroughMouseDown) {
+      this.hasPassedThroughMouseMove = true;
+    }
     if (this.mainCarousel) {
       if (!this.isDrageStart) return
       e.preventDefault();
@@ -128,6 +136,7 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   }
 
   onMouseDown(e: MouseEvent | TouchEvent) {
+    this.hasPassedThroughMouseDown = true;
     e.preventDefault();
     this.dragSmooth = true;
     this.isDrageStart = true;
@@ -140,7 +149,6 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   }
 
   autoSlide() {
-    
     this.positionDiff = Math.abs(this.positionDiff);
     let firstImgWidth = this.mainFirstImg.getBoundingClientRect().width + this.marginRight;
 
@@ -190,6 +198,29 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   }
 
   onMouseUp(e: MouseEvent | TouchEvent) {
+
+    this.isDrageStart = false;
+    // for the onClick product don't get into conflic with mouse up
+    if(!this.hasPassedThroughMouseMove){
+      
+      if (e instanceof MouseEvent) {
+        if (e.pageX >= 300 && e.pageX <= 707 && e.pageY >= 1526 && e.pageY <= 1887 && this.indexImg===0){
+          //  be careful it will only go to the maillot pro 2025 link
+          this.onClickProduct('Maillot Pro 2025')
+        }
+      }
+      
+
+    }
+    this.hasPassedThroughMouseMove=false;
+    this.hasPassedThroughMouseDown=false;
+
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    this.autoSlide();
+  }
+
+  onMouseleave(e: MouseEvent | TouchEvent) {
     this.isDrageStart = false;
 
     if (!this.isDragging) return;
@@ -222,8 +253,6 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   }
 
   setIndexImg(index: number){
-    console.log(this.nosProduitsImg.length - 1);
-    console.log(this.indexImg);
 
     const diffIndex = index - this.indexImg;
     const targetScrollLeft = index*(this.mainFirstImg.getBoundingClientRect().width+this.marginRight)
@@ -273,9 +302,8 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
 
 
     onClickProduct(name: string){
-      console.log('clic')
       const routerName = name.replace(/ /g, "-");
-      this.router.navigate([`/products/${routerName}`]);
+      this.router.navigate([`/products/${routerName}`]); 
     }
 
   ngOnInit(): void {
@@ -284,7 +312,7 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
 
   onTouchProduct(n:string){
     if (!this.isDragging){
-      console.log('hey');
+      if (n!=='Maillot Pro 2025') return;
       this.onClickProduct(n)
     }
     
