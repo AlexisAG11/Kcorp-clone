@@ -1,5 +1,5 @@
-<div class="bg-primary-black font-cairo text-white">
-    <div #container0 class="pt-[1.875rem] w-full flex flex-col items-center" [ngClass]="true ? 'block' : 'hidden'">
+<div class="bg-primary-black font-cairo text-white md:hidden">
+    <div #container0 class="w-full flex flex-col items-center">
         <div class="w-full px-0 md:px-[2.1rem] overflow-hidden max-w-[85.625rem]">
             <ul #carousel0 class="flex overflow-hidden h-full w-full relative" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)">
                 <li *ngFor="let nosProduitImg of nosProduitsImg; let i = index" #firstImg0 class=" relative w-full shrink-0  md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img"   [ngClass]="{
@@ -28,15 +28,334 @@
             </ul>
         </div>
         <div class="p-5 mt-[1.25rem] text-[.875rem] border-[.0625rem] border-[#4f5264]">
-            <div class="flex">
-                <div class="uppercase font-bold pr-[3.125rem]">personnalise ton maillot (+15€)
+            <div class="flex justify-between">
+                <div class="uppercase font-bold pr-[3.125rem] tracking-[.0625rem]">personnalise ton maillot (+15€)
                 </div>
-                <div>
+                <div class="flex items-center">
                     <mat-slide-toggle [(ngModel)]="isActive"></mat-slide-toggle>   
                 </div>
             </div>
-            <div>{{isActive}}</div>
+            <!-- <div>{{isActive}}</div> -->
+            <!-- <div [ngClass]="isActive ? 'block' : 'hidden'"> -->
+            <div class="transition-all" [ngClass]="isActive ? 'visible opacity-100 max-h-[16.25rem]' : 'invisible max-h-0 opacity-0'">
+                <div class="w-full mt-3">
+                    <mat-form-field>
+                        <mat-label>Sélectionner un joueur</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let option of optionSelectArray" [value]="option">{{option}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="uppercase font-bold mt-4">ou</div>
+                <div class="mt-4 flex gap-[1.25rem]">
+                    <div class="relative">
+                        <input type="text" class="border-b-[.0625rem] border-[#4f5264] pb-[.625rem] bg-transparent text w-full text-[.875rem] focus:outline-none" placeholder="1" [(ngModel)]="inputValueNumber" maxlength="2" (keypress)="numberOnly($event)">
+                        <span class="absolute top-0 right-0 text-[.625rem]">
+                            <span class="">{{inputValueNumber.length}}</span>/2
+                        </span>
+                    </div>
+                    <div class="relative shrink-0 w-[70%]">
+                        <input type="text" class="border-b-[.0625rem] border-[#4f5264] pb-[.625rem] bg-transparent text w-full text-[.875rem] focus:outline-none" placeholder="PSEUDO SUR LE MAILLOT"  [(ngModel)]="inputValuePseudo" maxlength="15">
+                        <span class="absolute top-0 right-0 text-[.625rem]">
+                            <span class="">{{inputValuePseudo.length}}</span>/15
+                        </span>
+                    </div>
+                </div>
+                <button class="underline font-bold tracking-[.0625rem] underline-offset-[.25rem] cursor-pointer mt-[1.5625rem]">Voir la personalisation</button>
+            </div>
+        </div>
+        <div class="mt-[1.875rem]">
+            <div>
+                <div class="w-[7.5rem] h-[2.5rem] flex">
+                    <button class="flex-1 border-b-[.0625rem] border-t-[.0625rem] border-l-[.0625rem] border-[#4f5264]" (click)="minusNumberOfProduct()" [disabled]="numOfProduct===1">-</button>
+                    <div class="flex-1 flex justify-center items-center border-[.0625rem] border-[#4f5264]">{{numOfProduct}}</div>
+                    <button class="flex-1 border-b-[.0625rem] border-t-[.0625rem] border-r-[.0625rem] border-[#4f5264]" (click)="plusNumberOfProduct()">+</button>
+                </div>
+            </div>
+            <div class="mt-[1.875rem] text-[1.25rem]">
+            €<span class="">{{priceOfProduct}}</span>,00
+            </div>
+        </div>
+        <div class="mt-[1.5625rem] flex gap-2">
+            <button class="flex-1 font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] hover:text-white hover:bg-[rgb(16,30,53)] transition-all"> AJOUTER AU PANIER</button>
+            <button class="flex justify-center items-center cursor-pointer w-10 border-[.0625rem] border-[#4f5264]  group  hover:bg-primary-light transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="group-hover:stroke-black transition-color w-5 stroke-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+            </button>
+        </div>
+        <div class="mt-[1.25rem] flex gap-4 items-center">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40" height="40" stroke-width="0.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd" viewBox="0 0 6.827 6.827"><defs><style>.fil1{fill:transparent}</style></defs><path style="fill:transparent" d="M0 0h6.827v6.827H0z"/><g id="Layer_x0020_1"><path class="fil1 stroke-white" d="M3.426 1a.08.08 0 0 0-.04.005l-.9.316 2.528.985.93-.327a.053.053 0 0 0 .026-.065c-.007-.018-.025-.029-.042-.035L3.426.999zm-1.407.485-1.136.4a.053.053 0 0 0-.026.065c.006.018.024.029.042.035l2.502.88a.08.08 0 0 0 .04-.006l1.033-.363-2.455-1.01zM3.359 2.948v2.785-2.785zm.109 2.823 2.471-.866a.055.055 0 0 0 .034-.052V2.066a.11.11 0 0 1-.017.008l-.913.32.014.72c0 .035-.018.067-.054.078l-.376.12c-.048.015-.11-.014-.11-.067l-.012-.662-1.037.365V5.77zM.887 4.905l2.473.868a.105.105 0 0 1-.002-.019V2.95L.881 2.077a.11.11 0 0 1-.028-.011v2.787c0 .023.013.043.034.052z"/></g></svg>
+            </div>
+            <div class="flex flex-col text-[.875rem]">
+                <div>Livraison Rapide</div>
+                <div>Nous faisons le maximum pour vous livrer en 5 à 10 jours.</div>
+            </div>
+        </div>
+        <div class="mt-[1.25rem]">
+            <div class="border-y-[.0625rem] border-[#4f5264]">
+                <button class="flex items-center justify-between w-full py-[1rem] cursor-pointer transition-all duration-200" (click)="isCustom = !isCustom">
+                    <div class="uppercase font-bold text-[1.25rem]">Customisation</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-4 transition-all" [ngClass]="isCustom ? 'rotate-180 text-primary-light':'text-white'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </button>
+                <ul class="ml-[.9375rem] pb-5 text-[.875rem] leading-[1.5625rem]" [ngClass]="isCustom ? 'block' : 'hidden'">
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Chaque maillot personnalisé étant fabriqué sur commande, il faut compter un délai supplémentaire de 10-12 jours ouvrables pour l'expédition lorsqu'il est en stock.</div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>En raison de la nature du produit, les maillots personnalisés ne peuvent faire l'objet d'un remboursement ou d'un échange, sauf si l'article est défectueux. </div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Attention, la personnalisation ne peut être modifiée ultérieurement.</div>
+                    </li>
+                </ul>
 
+            </div>
+            <div class="border-b-[.0625rem] border-[#4f5264]">
+                <button class="flex items-center justify-between w-full py-[1rem] cursor-pointer transition-all duration-200" (click)="isCompo = !isCompo">
+                    <div class="uppercase font-bold text-[1.25rem]">Composition</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-4 transition-all" [ngClass]="isCompo ? 'rotate-180 text-primary-light':'text-white'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </button>
+                <ul class="ml-[.9375rem] pb-5 text-[.875rem] leading-[1.5625rem]" [ngClass]="isCompo ? 'block' : 'hidden'">
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Notre Maillot Pro 2025 est fabriqué au Portugal </div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>100% Polyester recyclé</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="border-b-[.0625rem] border-[#4f5264]">
+                <button class="flex items-center justify-between w-full py-[1rem] cursor-pointer transition-all duration-200" (click)="isEntr = !isEntr">
+                    <div class="uppercase font-bold text-[1.25rem]">Entretien</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-4 transition-all" [ngClass]="isEntr ? 'rotate-180 text-primary-light':'text-white'">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </button>
+                <ul class="ml-[.9375rem] pb-5 text-[.875rem] leading-[1.5625rem]" [ngClass]="isEntr ? 'block' : 'hidden'">
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Veuillez patienter 24 heures après avoir reçu l'article avant de le laver.</div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Retournez les vêtements à l'envers avant de les laver.</div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Lavage à 30°C</div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Si flocage ou sérigraphie ne pas mettre dans le sèche-linge</div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Ne jamais repasser directement sur les matériaux appliqués.</div>
+                    </li>
+                    <li class="flex relative">
+                        <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                        <div>Repassez toujours à l'envers</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="w-full justify-start mt-20 text-[#767992] text-[.75rem] pb-5  border-b-[.0625rem] border-[#4f5264] max-w-[85.625rem]">
+        <div class="pl-5 flex gap-1">
+            <a routerLink="/" class="cursor-pointer">Accueil</a>
+            <p>></p>
+            <p>Maillot Pro 2025</p>
+        </div>
+    </div>
+    <app-shop-newsletter class="text-white"></app-shop-newsletter>
+</div>
+
+
+<!-- 
+
+laptop mode
+
+ -->
+
+
+<div class="bg-primary-black font-cairo text-white hidden md:block">
+    <div class="flex">
+        <div class="flex-1">
+            <ul class="flex flex-col gap-4 w-full">
+                <li *ngFor="let nosProduitImg of nosProduitsImg" class="w-full">
+                    <img [src]="nosProduitImg.imgUrl" alt="" class="w-full">
+                </li>
+            </ul>
+            <div class="mt-[1.25rem] pl-[2.1875rem]">
+                <div class="border-y-[.0625rem] border-[#4f5264]">
+                    <button class="flex items-center justify-between w-full py-[1rem] cursor-pointer transition-all duration-200" (click)="isCustom = !isCustom">
+                        <div class="uppercase font-bold text-[1.25rem]">Customisation</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-4 transition-all" [ngClass]="isCustom ? 'rotate-180 text-primary-light':'text-white'">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                    <ul class="ml-[.9375rem] pb-5 text-[.875rem] leading-[1.5625rem]" [ngClass]="isCustom ? 'block' : 'hidden'">
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Chaque maillot personnalisé étant fabriqué sur commande, il faut compter un délai supplémentaire de 10-12 jours ouvrables pour l'expédition lorsqu'il est en stock.</div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>En raison de la nature du produit, les maillots personnalisés ne peuvent faire l'objet d'un remboursement ou d'un échange, sauf si l'article est défectueux. </div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Attention, la personnalisation ne peut être modifiée ultérieurement.</div>
+                        </li>
+                    </ul>
+    
+                </div>
+                <div class="border-b-[.0625rem] border-[#4f5264]">
+                    <button class="flex items-center justify-between w-full py-[1rem] cursor-pointer transition-all duration-200" (click)="isCompo = !isCompo">
+                        <div class="uppercase font-bold text-[1.25rem]">Composition</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-4 transition-all" [ngClass]="isCompo ? 'rotate-180 text-primary-light':'text-white'">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                    <ul class="ml-[.9375rem] pb-5 text-[.875rem] leading-[1.5625rem]" [ngClass]="isCompo ? 'block' : 'hidden'">
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Notre Maillot Pro 2025 est fabriqué au Portugal </div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>100% Polyester recyclé</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-b-[.0625rem] border-[#4f5264]">
+                    <button class="flex items-center justify-between w-full py-[1rem] cursor-pointer transition-all duration-200" (click)="isEntr = !isEntr">
+                        <div class="uppercase font-bold text-[1.25rem]">Entretien</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="size-4 transition-all" [ngClass]="isEntr ? 'rotate-180 text-primary-light':'text-white'">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                    <ul class="ml-[.9375rem] pb-5 text-[.875rem] leading-[1.5625rem]" [ngClass]="isEntr ? 'block' : 'hidden'">
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Veuillez patienter 24 heures après avoir reçu l'article avant de le laver.</div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Retournez les vêtements à l'envers avant de les laver.</div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Lavage à 30°C</div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Si flocage ou sérigraphie ne pas mettre dans le sèche-linge</div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Ne jamais repasser directement sur les matériaux appliqués.</div>
+                        </li>
+                        <li class="flex relative">
+                            <div class="bg-primary-light w-[.3125rem] h-[.3125rem] absolute top-[.625rem] -left-[.75rem]"></div>
+                            <div>Repassez toujours à l'envers</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 flex justify-center">
+            <div class="mt-[10rem] w-[21.875rem] lg:w-[30rem] h-[70rem] sticky -top-[400px]">
+                <div>
+                    <div class="text-[0.8125rem] text-[#757575] leading-[1.125rem]">Maillot</div>
+                    <div class="uppercase text-[2.5rem] font-bold mt-[.25rem] leading-[2.5rem]">Mailot Pro 2025</div>
+                    <p class="text-sm leading-[1.5625rem] mt-[.9375rem]">Découvrez le maillot officiel de la saison 2025, conçu pour accompagner nos joueurs sur les plus grandes scènes compétitives mondiales. Avec son design audacieux orné de flammes bleues, ce maillot symbolise la détermination et la passion de la Karmine. Fabriqué à partir de polyester 100% recyclé FL NanoMatter™ en collaboration avec notre nouvel équipementier Fulllife, ce maillot allie technicité et qualité. Grâce à son jacquard exceptionnel et un tissage en nid d’abeille, il offre un équilibre parfait entre légèreté, confort et performance. Chaque détail a été pensé pour offrir un produit unique, à la hauteur de votre engagement.
+                    </p>
+                </div>
+                <div class="p-5 mt-[1.875rem] text-[.875rem] border-[.0625rem] border-[#4f5264]">
+                    <button class="underline font-bold tracking-[.0625rem] underline-offset-[.25rem] cursor-pointer mb-[1.4375rem]">Guide des tailles</button>
+                    <ul class="font-nippo flex flex-wrap gap-[.9375rem]">
+                        <li *ngFor="let arr of tailleArray; let i = index" class="w-[2.5rem] h-[2.5rem] ">
+                            <a class=" w-full h-full border-[.0625rem] border-[#4f5264] flex items-center justify-center transition-all duration-300 cursor-pointer hover:bg-primary-light hover:text-black" [ngClass]="arr.onIt === true ? 'bg-primary-light text-black' : 'bg-transparent text-white'" (click)="onClickTaille(i)">{{arr.taille}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="p-5 mt-[1.25rem] text-[.875rem] border-[.0625rem] border-[#4f5264]">
+                    <div class="flex justify-between">
+                        <div class="uppercase font-bold pr-[3.125rem] tracking-[.0625rem]">personnalise ton maillot (+15€)
+                        </div>
+                        <div class="flex items-center">
+                            <mat-slide-toggle [(ngModel)]="isActive"></mat-slide-toggle>   
+                        </div>
+                    </div>
+                    <div class="transition-all" [ngClass]="isActive ? 'visible opacity-100 max-h-[16.25rem]' : 'invisible max-h-0 opacity-0'">
+                        <div class="w-full mt-3">
+                            <mat-form-field>
+                                <mat-label>Sélectionner un joueur</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let option of optionSelectArray" [value]="option">{{option}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="uppercase font-bold mt-4">ou</div>
+                        <div class="mt-4 flex gap-[1.25rem]">
+                            <div class="relative">
+                                <input type="text" class="border-b-[.0625rem] border-[#4f5264] pb-[.625rem] bg-transparent text w-full text-[.875rem] focus:outline-none" placeholder="1" [(ngModel)]="inputValueNumber" maxlength="2" (keypress)="numberOnly($event)">
+                                <span class="absolute top-0 right-0 text-[.625rem]">
+                                    <span class="">{{inputValueNumber.length}}</span>/2
+                                </span>
+                            </div>
+                            <div class="relative shrink-0 w-[70%]">
+                                <input type="text" class="border-b-[.0625rem] border-[#4f5264] pb-[.625rem] bg-transparent text w-full text-[.875rem] focus:outline-none" placeholder="PSEUDO SUR LE MAILLOT"  [(ngModel)]="inputValuePseudo" maxlength="15">
+                                <span class="absolute top-0 right-0 text-[.625rem]">
+                                    <span class="">{{inputValuePseudo.length}}</span>/15
+                                </span>
+                            </div>
+                        </div>
+                        <button class="underline font-bold tracking-[.0625rem] underline-offset-[.25rem] cursor-pointer mt-[1.5625rem]">Voir la personalisation</button>
+                    </div>
+                </div>
+                <div class="mt-[1.875rem]">
+                    <div>
+                        <div class="w-[7.5rem] h-[2.5rem] flex">
+                            <button class="flex-1 border-b-[.0625rem] border-t-[.0625rem] border-l-[.0625rem] border-[#4f5264]" (click)="minusNumberOfProduct()" [disabled]="numOfProduct===1">-</button>
+                            <div class="flex-1 flex justify-center items-center border-[.0625rem] border-[#4f5264]">{{numOfProduct}}</div>
+                            <button class="flex-1 border-b-[.0625rem] border-t-[.0625rem] border-r-[.0625rem] border-[#4f5264]" (click)="plusNumberOfProduct()">+</button>
+                        </div>
+                    </div>
+                    <div class="mt-[1.875rem] text-[1.25rem]">
+                    €<span class="">{{priceOfProduct}}</span>,00
+                    </div>
+                </div>
+                <div class="mt-[1.5625rem] flex gap-2">
+                    <button class="flex-1 font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] hover:text-white hover:bg-[rgb(16,30,53)] transition-all"> AJOUTER AU PANIER</button>
+                    <button class="flex justify-center items-center cursor-pointer w-10 border-[.0625rem] border-[#4f5264]  group  hover:bg-primary-light transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="group-hover:stroke-black transition-color w-5 stroke-white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mt-[1.25rem] flex gap-4 items-center">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40" height="40" stroke-width="0.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd" viewBox="0 0 6.827 6.827"><defs><style>.fil1{fill:transparent}</style></defs><path style="fill:transparent" d="M0 0h6.827v6.827H0z"/><g id="Layer_x0020_1"><path class="fil1 stroke-white" d="M3.426 1a.08.08 0 0 0-.04.005l-.9.316 2.528.985.93-.327a.053.053 0 0 0 .026-.065c-.007-.018-.025-.029-.042-.035L3.426.999zm-1.407.485-1.136.4a.053.053 0 0 0-.026.065c.006.018.024.029.042.035l2.502.88a.08.08 0 0 0 .04-.006l1.033-.363-2.455-1.01zM3.359 2.948v2.785-2.785zm.109 2.823 2.471-.866a.055.055 0 0 0 .034-.052V2.066a.11.11 0 0 1-.017.008l-.913.32.014.72c0 .035-.018.067-.054.078l-.376.12c-.048.015-.11-.014-.11-.067l-.012-.662-1.037.365V5.77zM.887 4.905l2.473.868a.105.105 0 0 1-.002-.019V2.95L.881 2.077a.11.11 0 0 1-.028-.011v2.787c0 .023.013.043.034.052z"/></g></svg>
+                    </div>
+                    <div class="flex flex-col text-[.875rem]">
+                        <div>Livraison Rapide</div>
+                        <div>Nous faisons le maximum pour vous livrer en 5 à 10 jours.</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <app-shop-newsletter class="text-white"></app-shop-newsletter>

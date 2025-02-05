@@ -35,6 +35,9 @@ import { MaillotPro2025Component } from './features/products/maillot-pro-2025/ma
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatRadioModule} from '@angular/material/radio';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -73,7 +76,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     FormsModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ],
   providers: [
     provideAnimationsAsync()

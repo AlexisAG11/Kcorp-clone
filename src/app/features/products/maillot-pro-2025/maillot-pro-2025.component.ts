@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-maillot-pro-2025',
@@ -10,7 +11,34 @@ export class MaillotPro2025Component implements OnInit {
 
   isActive = false;
 
-carousel0: any;
+  // disableSelect = new FormControl(false);
+  numOfProduct = 1;
+  priceOfProduct = 80;
+
+  isCustom = false;
+  isCompo = false;
+  isEntr = false;
+
+  optionSelectArray = [
+    "7 - CANNA",
+    "11 - YIKE",
+    "10 - VLADI",
+    "28 - CALISTE",
+    "1 - TARGAMAS",
+    "10 - AVEZ",
+    "64 - SUYGETSU",
+    "24 - MARTEEN",
+    "23 - SAADHAK",
+    "9 - ELITE",
+    "16 - ZE1SH",
+    "54 - ATOW",
+    "15 - DRALII",
+    "9 - VATIRA",
+    "5 - DOUBLE",
+    "17 - CANBIZZ",
+  ];
+
+  carousel0: any;
   carousel1: any;
   carousel2: any;
   firstImg0: any;
@@ -64,6 +92,68 @@ carousel0: any;
     {taille: '2XL', onIt: false},
     {taille: '3XL', onIt: false},
   ]
+
+  inputValueNumber = "";
+  inputValuePseudo = "";
+
+  numberOnly(event:any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+
+  minusNumberOfProduct(){
+    this.numOfProduct--;
+    this.priceOfProduct = 80*this.numOfProduct;
+  }
+  plusNumberOfProduct(){
+    this.numOfProduct++;
+    this.priceOfProduct = 80*this.numOfProduct;
+  }
+
+
+  lastScrollY = 0;
+  isSticky = false;
+
+  stopLastScrollY = 0;
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const scrollY = window.scrollY;
+    const threshold = 300; // Stick when scrolled past 50px
+
+    if (scrollY > threshold && scrollY > this.lastScrollY) {
+      // Scrolling down, make it sticky
+      this.isSticky = true;
+      this.stopLastScrollY = this.lastScrollY;
+    } else if (scrollY < this.lastScrollY) {
+      // Scrolling up, remove sticky
+      this.isSticky = false;
+    }
+    
+    this.lastScrollY = scrollY;
+
+  }
+
+  get dynamicTop() {
+    return `-top-[${this.stopLastScrollY}px]`;
+  }
+
+  // inputLength: number = 0;
+
+  // limitInputLength() {
+  //   const maxLength = 2;
+  //   const stringValue = this.inputValueNumber?.toString() || '';
+    
+  //   // If the length exceeds the maxLength, truncate the input value
+  //   if (stringValue.length > maxLength) {
+  //     this.inputValueNumber = parseFloat(stringValue.slice(0, maxLength));
+  //   }
+    
+  //   this.inputLength = this.inputValueNumber?.toString().length || 0;
+  // }
 
   onClickTaille(index:number){
     this.tailleArray.forEach(item => {
