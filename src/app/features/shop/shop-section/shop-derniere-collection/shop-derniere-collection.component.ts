@@ -80,6 +80,7 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   carousel1: any;
   carousel2: any;
   firstImg0: any;
+  descriptionProduct: any;
   firstImg1: any;
   firstImg2: any;
   container0: any;
@@ -89,6 +90,7 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
   @ViewChild('carousel1') carouselElementRef1!: ElementRef;
   @ViewChild('carousel2') carouselElementRef2!: ElementRef;
   @ViewChild('firstImg0') firstImgElementRef0!: ElementRef;
+  @ViewChild('descriptionProduct') descriptionProductElementRef0!: ElementRef;
   @ViewChild('firstImg1') firstImgElementRef1!: ElementRef;
   @ViewChild('firstImg2') firstImgElementRef2!: ElementRef;
   @ViewChild('container0') containerElementRef0!: ElementRef;
@@ -204,9 +206,18 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     if(!this.hasPassedThroughMouseMove){
       
       if (e instanceof MouseEvent) {
-        if (e.pageX >= 300 && e.pageX <= 707 && e.pageY >= 1526 && e.pageY <= 1887 && this.indexImg===0){
-          //  be careful it will only go to the maillot pro 2025 link
-          this.onClickProduct('Maillot Pro 2025')
+        const rect = this.firstImg0.getBoundingClientRect();
+        const rectDescription = this.descriptionProduct.getBoundingClientRect();
+        // Get the click position relative to the element. Do that in a case of laptop but not full screen
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        let heightModify = rect.height-rectDescription.height;
+        const screenWidth = window.innerWidth;
+        if (screenWidth > 1536) {
+         heightModify -=45;
+        } 
+        if (clickX >= 0 && clickX <= rect.width && clickY >= 0 && clickY <= heightModify && this.indexImg === 0) {
+          this.onClickProduct('Maillot Pro 2025');
         }
       }
       
@@ -325,6 +336,7 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     this.carousel1 = this.carouselElementRef1.nativeElement;
     this.carousel2 = this.carouselElementRef2.nativeElement;
     this.firstImg0 = this.firstImgElementRef0.nativeElement;
+    this.descriptionProduct = this.descriptionProductElementRef0.nativeElement;
     this.firstImg1 = this.firstImgElementRef1.nativeElement;
     this.firstImg2 = this.firstImgElementRef2.nativeElement;
     this.container0 = this.containerElementRef0.nativeElement;
@@ -334,5 +346,80 @@ export class ShopDerniereCollectionComponent implements AfterViewInit {
     this.mainContainer = this.container0;
     this.mainFirstImg = this.firstImg0;
   }
+
+
+// *
+// *
+// *
+//   ajouter panier part 
+// *
+// *
+// *
+
+
+
+isOverlayAjoutPanier = false;
+tailleArray = [
+  {taille: 'XS', onIt: false},
+  {taille: 'S', onIt: false},
+  {taille: 'M', onIt: false},
+  {taille: 'L', onIt: false},
+  {taille: 'XL', onIt: false},
+  {taille: '2XL', onIt: false},
+  {taille: '3XL', onIt: false},
+]
+isActive = false;
+optionSelectArray = [
+  "7 - CANNA",
+  "11 - YIKE",
+  "10 - VLADI",
+  "28 - CALISTE",
+  "1 - TARGAMAS",
+  "10 - AVEZ",
+  "64 - SUYGETSU",
+  "24 - MARTEEN",
+  "23 - SAADHAK",
+  "9 - ELITE",
+  "16 - ZE1SH",
+  "54 - ATOW",
+  "15 - DRALII",
+  "9 - VATIRA",
+  "5 - DOUBLE",
+  "17 - CANBIZZ",
+];
+inputValueNumber = "";
+inputValuePseudo = "";
+numOfProduct = 1;
+priceOfProduct = 80;
+
+onClickTaille(index:number){
+  this.tailleArray.forEach(item => {
+    if (item.onIt === true) {
+        item.onIt = false;
+    }
+    this.tailleArray[index].onIt = true;
+  });
+}
+
+numberOnly(event:any): boolean {
+  const charCode = (event.which) ? event.which : event.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+  return true;
+}
+
+minusNumberOfProduct(){
+  this.numOfProduct--;
+  this.priceOfProduct = 80*this.numOfProduct;
+}
+plusNumberOfProduct(){
+  this.numOfProduct++;
+  this.priceOfProduct = 80*this.numOfProduct;
+}
+
+onOverlayAjoutPanier(){
+  this.isOverlayAjoutPanier = true;
+}
 
 }

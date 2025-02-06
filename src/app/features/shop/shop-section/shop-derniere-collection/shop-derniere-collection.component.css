@@ -3,3 +3,111 @@
     overflow: hidden;
     height: 100%;
 }
+
+mat-slide-toggle {
+    --mdc-switch-selected-track-color: #0cf !important;
+    --mdc-switch-unselected-track-color: black !important;
+    --mdc-switch-selected-focus-track-color: #0cf !important;
+    --mdc-switch-selected-hover-track-color: #0cf !important;
+    --mdc-switch-selected-pressed-track-color: #0cf !important;
+    --mdc-switch-disabled-selected-track-color: black !important;
+    --mdc-switch-disabled-unselected-track-outline-color: black !important;
+    --mdc-switch-unselected-focus-track-color: black !important;
+    --mdc-switch-unselected-hover-track-color: black !important;
+    --mdc-switch-unselected-pressed-track-color: black !important;
+  
+  
+    --mdc-switch-track-outline-color: white !important;
+    --mdc-switch-unselected-icon-color: none !important;
+    --mdc-switch-selected-icon-color: none !important;
+    --mdc-switch-unselected-handle-color: #0cf !important;
+    --mdc-switch-unselected-focus-handle-color: #0cf !important;
+    --mdc-switch-unselected-hover-handle-color: #0cf !important;
+    --mdc-switch-unselected-pressed-handle-color: #0cf !important;
+  
+  
+    --mdc-switch-selected-handle-color: white !important;
+    --mdc-switch-selected-focus-handle-color: white !important;
+    --mdc-switch-selected-hover-handle-color: white !important;
+    --mdc-switch-selected-pressed-handle-color: white !important;
+    --mdc-switch-disabled-selected-handle-color: white !important;
+    --mdc-switch-disabled-unselected-handle-color: white !important;
+  
+    --mat-switch-with-icon-handle-size: 16px !important;
+    --mdc-switch-state-layer-size: 16px !important;
+  
+    --mat-switch-track-outline-width: 1px !important;
+  
+    --mat-switch-unselected-handle-size: 16px !important;
+    --mat-switch-selected-handle-size: 16px !important;
+    --mat-switch-pressed-handle-size: 16px !important;
+    --mat-switch-selected-handle-horizontal-margin:0 23px !important;
+    --mat-switch-selected-with-icon-handle-horizontal-margin:0 23px !important;
+    --mat-switch-selected-pressed-handle-horizontal-margin:0 23px !important;
+    --mat-switch-unselected-with-icon-handle-horizontal-margin:0 4px !important;
+    --mat-switch-unselected-pressed-handle-horizontal-margin:0 4px !important;
+  
+  }
+  
+  ::ng-deep mat-slide-toggle {
+    width: 42px !important;
+    height: 22px !important;
+  
+  }
+  ::ng-deep mat-slide-toggle .mdc-form-field {
+    width: 100%;
+    height: 100%;
+  }
+  ::ng-deep mat-slide-toggle .mdc-switch.mdc-switch--unselected {
+    width: 100%;
+    height: 100%;
+  
+  }
+  ::ng-deep mat-slide-toggle .mdc-switch.mdc-switch--selected.mdc-switch--checked {
+    width: 100%;
+    height: 100%;
+  }
+  ::ng-deep mat-slide-toggle .mdc-switch__track {
+    width: 100%;
+    height: 100%;
+  }
+  ::ng-deep mat-slide-toggle .mdc-switch__handle{
+    width: 100%;
+    height: 100%;
+  }
+  /* 
+  
+  form field 
+  
+   */
+  
+  mat-form-field {
+    width:100%;
+    --mdc-filled-text-field-label-text-size: .875rem !important;
+    --mdc-filled-text-field-label-text-font: Cairo !important;
+    --mdc-filled-text-field-container-color: transparent !important;
+    --mat-form-field-filled-with-label-container-padding-top: 0 !important;
+    --mat-form-field-filled-with-label-container-padding-bottom: 4px !important;
+    --mat-form-field-container-height: 20px !important;
+    --mat-select-trigger-text-font: Cairo !important;
+    --mat-select-trigger-text-size: .875rem !important;
+    --mat-select-enabled-trigger-text-color: white !important;
+    --mdc-filled-text-field-focus-active-indicator-color: rgb(135, 135, 135) !important;
+  }
+  
+  ::ng-deep mat-form-field .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  ::ng-deep mat-form-field .mdc-floating-label.mat-mdc-floating-label.ng-tns-c508571215-0.ng-star-inserted{
+    color: white;
+  }
+  ::ng-deep mat-form-field .mat-mdc-select-arrow svg {
+    fill: white;
+  }
+  ::ng-deep mat-form-field .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+    height: 0 !important;
+  }
+  ::ng-deep .cdk-overlay-container {
+    z-index: 10000;
+  }
