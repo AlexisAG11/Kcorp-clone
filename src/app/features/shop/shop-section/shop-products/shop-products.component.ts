@@ -1,5 +1,4 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { activitiesUrl } from 'twilio/lib/jwt/taskrouter/util';
 
 @Component({
   selector: 'app-shop-products',
