@@ -6,7 +6,7 @@
         <div #container3 class="mt-[1.875rem] w-full flex flex-col items-center">
             <div class="w-full px-[1.25rem] md:px-[2.1rem] overflow-hidden max-w-[85.625rem]">
                 <ul #carousel3 class="flex overflow-hidden h-full w-full" (mousemove)="onMouseMove($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (touchstart)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (touchend)="onMouseUp($event)" (mouseleave)="onMouseUp($event)" >
-                    <li *ngFor="let Img of Accessoires; let i = index" #firstImg3 class="relative w-full shrink-0 md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img" [ngClass]="{
+                    <li *ngFor="let Img of Accessoires; let i = index" #firstImg3 class="relative w-full shrink-0 md:w-[calc(100%/3-2px*25/3)] lg:w-[calc(100%/3-2px*40/3)] transition-translateX ease-in-out duration-300 group/img opacity-60 pointer-events-none" [ngClass]="{
                         'mr-[0px]': i === Accessoires.length - 1,
                         'mr-[10px] md:mr-[25px] lg:mr-[40px]': i !== Accessoires.length - 1,
                         }">

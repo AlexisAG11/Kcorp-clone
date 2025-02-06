@@ -34,7 +34,7 @@
                                                 <span class="absolute bg-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform h-[0.45rem] w-[0.45rem] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></span>
                                             </label>
                                         </div>
-                                        <p class="cursor-pointer" onclick="document.getElementById('check').click();">En stock (3)</p>
+                                        <p class="cursor-pointer" onclick="document.getElementById('check').click();">En stock (1)</p>
                                     </li>
                                     <li class="flex gap-1 items-center cursor-pointer mt-[.3rem]">
                                         <div class="inline-flex items-center">
@@ -186,14 +186,14 @@
                         <div class="absolute top-[2rem] right-0 w-[10rem] bg-primary-black font-cairo text-white text-[.700rem] border border-[#4f5264] z-[2]"
                         [ngClass]="isFilterByTop ? 'block' : 'hidden'">
                             <ul class="p-[.625rem]">
-                                <li class="font-bold">En vedette</li>
-                                <li class="mt-[.25rem]">Meilleurs ventes</li>
-                                <li class="mt-[.25rem]">de A à Z</li>
-                                <li class="mt-[.25rem]">de Z à A</li>
-                                <li class="mt-[.25rem]">Prix croissant</li>
-                                <li class="mt-[.25rem]">Prix décroissant</li>
-                                <li class="mt-[.25rem]">Du plus ancien au plus récent</li>
-                                <li class="mt-[.25rem]">Du plus récent au plus ancien</li>
+                                <li class="font-bold cursor-pointer">En vedette</li>
+                                <li class="mt-[.25rem] cursor-pointer">Meilleurs ventes</li>
+                                <li class="mt-[.25rem] cursor-pointer">de A à Z</li>
+                                <li class="mt-[.25rem] cursor-pointer">de Z à A</li>
+                                <li class="mt-[.25rem] cursor-pointer">Prix croissant</li>
+                                <li class="mt-[.25rem] cursor-pointer">Prix décroissant</li>
+                                <li class="mt-[.25rem] cursor-pointer">Du plus ancien au plus récent</li>
+                                <li class="mt-[.25rem] cursor-pointer">Du plus récent au plus ancien</li>
                             </ul>
                         </div>
                     </div>
@@ -201,15 +201,16 @@
                         <div *ngFor="let nosProduitImg of nosProduitsImg; let i = index" #firstImg0 class=" relative w-full shrink-0 group/img"   [ngClass]="{
                             'mr-[0px]': i === nosProduitsImg.length - 1,
                             'mr-[10px] md:mr-[25px] lg:mr-[40px]': i !== nosProduitsImg.length - 1,
+                            'opacity-60 pointer-events-none': i!==0,
                             }">
-                            <img [src]="nosProduitImg.imgUrl" alt="" class="object-cover w-full" draggable="false">
+                            <img [src]="nosProduitImg.imgUrl" alt="" class="object-cover w-full cursor-pointer" draggable="false" routerLink="/products/Maillot-Pro-2025">
                             <div class="px-[.625rem] py-[.625rem] md:px-4 md:py-4 lg:px-[1.25rem] lg:py-[1.25rem] text-[.75rem] md:text-[1rem] lg:text-[1.25rem] leading-4 md:leading-5 group-hover/img:translate-y-[-2.8125rem] transition-transform duration-200 bg-primary-black">
                                 <p class="font-cairo font-bold">{{nosProduitImg.title}}</p>
                                 <p class="font-cairo mt-1 md:mt-[.375rem]">{{nosProduitImg.subtitle}}</p>
                             </div>
                             <div class="absolute left-0 bottom-0 right-0 overflow-hidden">
                                 <div class="px-[1.25rem] transform translate-y-full transition-transform duration-200 group-hover/img:translate-y-0 w-full group/btn">
-                                    <button class=" font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] group-hover/btn:text-white group-hover/btn:bg-[#101e35] "> AJOUTER AU PANIER</button>
+                                    <button (click)="onOverlayAjoutPanier()" class=" font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] group-hover/btn:text-white group-hover/btn:bg-[#101e35] "> AJOUTER AU PANIER</button>
                                 </div>
                             </div>
                         </div>
@@ -242,13 +243,105 @@ filter bottom
 <div class="fixed right-[1.3rem] bottom-[4.1rem] w-[10rem] bg-primary-black font-cairo text-white text-[.700rem] border border-[#4f5264] z-[2000]"
     [ngClass]="isFilterByBottom ? 'block' : 'hidden'">
     <ul class="p-[.625rem]">
-        <li class="font-bold">En vedette</li>
-        <li class="mt-[.25rem]">Meilleurs ventes</li>
-        <li class="mt-[.25rem]">de A à Z</li>
-        <li class="mt-[.25rem]">de Z à A</li>
-        <li class="mt-[.25rem]">Prix croissant</li>
-        <li class="mt-[.25rem]">Prix décroissant</li>
-        <li class="mt-[.25rem]">Du plus ancien au plus récent</li>
-        <li class="mt-[.25rem]">Du plus récent au plus ancien</li>
+        <li class="font-bold cursor-pointer">En vedette</li>
+        <li class="mt-[.25rem] cursor-pointer">Meilleurs ventes</li>
+        <li class="mt-[.25rem] cursor-pointer">de A à Z</li>
+        <li class="mt-[.25rem] cursor-pointer">de Z à A</li>
+        <li class="mt-[.25rem] cursor-pointer">Prix croissant</li>
+        <li class="mt-[.25rem] cursor-pointer">Prix décroissant</li>
+        <li class="mt-[.25rem] cursor-pointer">Du plus ancien au plus récent</li>
+        <li class="mt-[.25rem] cursor-pointer">Du plus récent au plus ancien</li>
     </ul>
+</div>
+
+<div class="fixed z-[5000] left-0 top-0 bottom-0 right-0 hidden text-white lg:block" [ngClass]="isOverlayAjoutPanier? 'visible' : 'invisible' ">
+    <div class="w-full h-full relative flex items-center justify-center">
+        <div class="bg-black/40 fixed left-0 top-0 bottom-0 right-0 z-[2]" (click)="isOverlayAjoutPanier=false"></div>
+        <div class="w-[72.5rem] relative bg-primary-black z-[4] flex min-h-[31.25rem] border border-[#4f5264] transition-all" [ngClass]="isOverlayAjoutPanier? 'translate-y-0 opacity-1' : 'translate-y-[-6.25rem] opacity-0' ">
+            <div class="flex-1">
+                <img src="../../../../../assets/images/4_2025.webp" class="object-cover w-full h-full" alt="">
+            </div>
+            <div class="flex-1 font-cairo flex flex-col justify-center">
+                <div class="px-[4rem]">
+                    <div>
+                        <div class="text-[0.8125rem] text-[#757575] leading-[1.125rem]">Maillot</div>
+                        <div class="uppercase text-[2.5rem] font-bold mt-[.25rem] leading-[2.5rem]">Maillot Pro 2025</div>
+                    </div>
+                    <div class="mt-10 text-[.875rem]">
+                        <ul class="font-nippo flex flex-wrap gap-[.9375rem]">
+                            <li *ngFor="let arr of tailleArray; let i = index" class="w-[2.5rem] h-[2.5rem] ">
+                                <a class=" w-full h-full border-[.0625rem] border-[#4f5264] flex items-center justify-center transition-colors duration-300 cursor-pointer hover:bg-primary-light hover:text-black" [ngClass]="arr.onIt === true ? 'bg-primary-light text-black' : 'bg-transparent text-white'" (click)="onClickTaille(i)">{{arr.taille}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-[1.5rem] text-[.875rem]">
+                        <div class="flex justify-between">
+                            <div class="uppercase font-bold pr-[3.125rem] tracking-[.0625rem]">personnalise ton maillot (+15€)
+                            </div>
+                            <div class="flex items-center">
+                                <mat-slide-toggle [(ngModel)]="isActive"></mat-slide-toggle>   
+                            </div>
+                        </div>
+                        <div class="transition-all" [ngClass]="isActive ? 'visible opacity-100 max-h-[16.25rem]' : 'invisible max-h-0 opacity-0'">
+                            <div class="w-full mt-3">
+                                <mat-form-field>
+                                    <mat-label>Sélectionner un joueur</mat-label>
+                                    <mat-select class="z-[10000]">
+                                        <mat-option *ngFor="let option of optionSelectArray" [value]="option">{{option}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="uppercase font-bold mt-4">ou</div>
+                            <div class="mt-4 flex gap-[1.25rem]">
+                                <div class="relative">
+                                    <input type="text" class="border-b-[.0625rem] border-[#4f5264] pb-[.625rem] bg-transparent text w-full text-[.875rem] focus:outline-none" placeholder="1" [(ngModel)]="inputValueNumber" maxlength="2" (keypress)="numberOnly($event)">
+                                    <span class="absolute top-0 right-0 text-[.625rem]">
+                                        <span class="">{{inputValueNumber.length}}</span>/2
+                                    </span>
+                                </div>
+                                <div class="relative shrink-0 w-[70%]">
+                                    <input type="text" class="border-b-[.0625rem] border-[#4f5264] pb-[.625rem] bg-transparent text w-full text-[.875rem] focus:outline-none" placeholder="PSEUDO SUR LE MAILLOT"  [(ngModel)]="inputValuePseudo" maxlength="15">
+                                    <span class="absolute top-0 right-0 text-[.625rem]">
+                                        <span class="">{{inputValuePseudo.length}}</span>/15
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="underline font-bold tracking-[.0625rem] underline-offset-[.25rem] cursor-pointer mt-[1.5625rem]">Voir la personalisation</button>
+                        </div>
+                    </div>
+                    <div class="mt-[1.875rem] flex items-center justify-between">
+                        <div class="text-[1.25rem]">
+                            €<span class="">{{priceOfProduct}}</span>,00
+                        </div>
+                        <div>
+                            <div class="w-[7.5rem] h-[2.5rem] flex">
+                                <button class="flex-1 border-b-[.0625rem] border-t-[.0625rem] border-l-[.0625rem] border-[#4f5264]" (click)="minusNumberOfProduct()" [disabled]="numOfProduct===1">-</button>
+                                <div class="flex-1 flex justify-center items-center border-[.0625rem] border-[#4f5264]">{{numOfProduct}}</div>
+                                <button class="flex-1 border-b-[.0625rem] border-t-[.0625rem] border-r-[.0625rem] border-[#4f5264]" (click)="plusNumberOfProduct()">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-[1.5625rem] flex gap-2">
+                        <button class="flex-1 font-nippo py-2 bg-primary-light text-primary-black block w-full text-[1rem] hover:text-white hover:bg-[rgb(16,30,53)] transition-colors"> AJOUTER AU PANIER</button>
+                        <button class="flex justify-center items-center cursor-pointer w-10 border-[.0625rem] border-[#4f5264]  group  hover:bg-primary-light transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="group-hover:stroke-black transition-color w-5 stroke-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex justify-center font-nippo text-[0.875rem]  mt-2">
+                        <span class="cursor-pointer underline hover:text-primary-light  transition-colors">Voir la fiche produit</span>
+                    </div>
+                </div>
+            </div>
+            <button class="absolute right-0 -top-[3.5rem] flex justify-center bg-primary-black items-center cursor-pointer w-9 h-9 border-[.0625rem] border-[#4f5264] group  hover:bg-primary-light transition-colors" (click)="isOverlayAjoutPanier=false">
+                <svg version="1.1" id="Capa_1" stroke-width="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                viewBox="0 0 490 490" xml:space="preserve" class="group-hover:fill-black group-hover:stroke-black transition-color transition-[stroke] w-3 fill-white stroke-white">
+                    <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 
+                    489.292,457.678 277.331,245.004 489.292,32.337 " />
+                </svg>
+            </button>
+
+        </div>
+    </div>
 </div>

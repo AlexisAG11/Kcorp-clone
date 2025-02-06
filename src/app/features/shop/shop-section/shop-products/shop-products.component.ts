@@ -102,7 +102,6 @@ Accessoires = [
       }
       const targetScrollLeft = firstImgWidth*this.indexImg;
       this.smoothScroll(targetScrollLeft);
-      console.log(this.indexImg);
       return
     }
     // left
@@ -119,7 +118,6 @@ Accessoires = [
 
   onMouseUp(e: MouseEvent | TouchEvent) {
     this.isDrageStart = false;
-    console.log(this.isDragging)
     if (!this.isDragging) return;
     this.isDragging = false;
     this.autoSlide();

@@ -9,12 +9,12 @@
         </a>
         <ul class="justify-center items-center gap-10 hidden xl:flex h-full">
             <li *ngFor="let nav of navLink; let i = index" class="h-full xl:flex" [ngClass]="{'group': i === 3}" (mouseenter)="onHover(true,i)" (mouseleave)="onHover(false,i)">
-                <a [routerLink]="nav.href" class="text-sm font-nippo hover:text-primary-light cursor-pointer h-full flex items-center border-b-2 border-transparent " [ngClass]="nav.label==='BOUTIQUE' ? 'text-primary-light' : 'text-white'"
+                <a [routerLink]="nav.href" class="text-sm font-nippo hover:text-primary-light cursor-pointer h-full flex items-center border-b-2 border-transparent "
                 [ngClass]="{ 
                     'text-primary-light': nav.label==='BOUTIQUE', 
                     'text-white': nav.label!=='BOUTIQUE',
                     'border-b-primary-light':(i === 3 && inBoutique),
-                    'text-gray-400 pointer-events-none':(i === 1 || i === 2)
+                    'opacity-40 pointer-events-none':(i === 1 || i === 2)
                     }"
                 >
                     <p>{{nav.label}}</p>

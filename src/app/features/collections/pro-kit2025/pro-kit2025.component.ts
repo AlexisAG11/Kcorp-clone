@@ -37,4 +37,80 @@ export class ProKit2025Component {
 
   
 
+  
+// *
+// *
+// *
+//   ajouter panier part 
+// *
+// *
+// *
+
+
+
+isOverlayAjoutPanier = false;
+tailleArray = [
+  {taille: 'XS', onIt: false},
+  {taille: 'S', onIt: false},
+  {taille: 'M', onIt: false},
+  {taille: 'L', onIt: false},
+  {taille: 'XL', onIt: false},
+  {taille: '2XL', onIt: false},
+  {taille: '3XL', onIt: false},
+]
+isActive = false;
+optionSelectArray = [
+  "7 - CANNA",
+  "11 - YIKE",
+  "10 - VLADI",
+  "28 - CALISTE",
+  "1 - TARGAMAS",
+  "10 - AVEZ",
+  "64 - SUYGETSU",
+  "24 - MARTEEN",
+  "23 - SAADHAK",
+  "9 - ELITE",
+  "16 - ZE1SH",
+  "54 - ATOW",
+  "15 - DRALII",
+  "9 - VATIRA",
+  "5 - DOUBLE",
+  "17 - CANBIZZ",
+];
+inputValueNumber = "";
+inputValuePseudo = "";
+numOfProduct = 1;
+priceOfProduct = 80;
+
+onClickTaille(index:number){
+  this.tailleArray.forEach(item => {
+    if (item.onIt === true) {
+        item.onIt = false;
+    }
+    this.tailleArray[index].onIt = true;
+  });
+}
+
+numberOnly(event:any): boolean {
+  const charCode = (event.which) ? event.which : event.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+  return true;
+}
+
+minusNumberOfProduct(){
+  this.numOfProduct--;
+  this.priceOfProduct = 80*this.numOfProduct;
+}
+plusNumberOfProduct(){
+  this.numOfProduct++;
+  this.priceOfProduct = 80*this.numOfProduct;
+}
+
+onOverlayAjoutPanier(){
+  this.isOverlayAjoutPanier = true;
+}
+
+
 }
