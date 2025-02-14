@@ -9,6 +9,10 @@ A clone website of https://www.karminecorp.fr/
 I used **Angular** and **tailwindCSS** for the frontend.
 
 
+
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
 
 ## Development server
